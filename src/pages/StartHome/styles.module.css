@@ -1,0 +1,142 @@
+* {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.wrapper {
+  max-width: 1920px;
+  margin: auto;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.banner {
+  position: relative;
+  background-image: url(../../assets/images/banner1.jpg);
+  background-size: cover;
+  border-bottom: 8px solid #222;
+}
+
+.container {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.banner-content {
+  position: relative;
+  padding: 20px 0;
+}
+
+.banner-content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 40px;
+  color: #e50914;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 1px;
+}
+
+.banner-content-signin {
+  background-color: #e50914;
+  font-weight: 400;
+  color: #fff;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 4px;
+  padding: 7px 14px;
+}
+
+.banner-content-wrap-text {
+  padding-bottom: 90px;
+}
+
+.banner-content-text {
+  padding: 80px 0;
+}
+
+.banner-main-text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 55px;
+  font-weight: 700;
+  line-height: 55px;
+  color: #fff;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.banner-main-text h5 {
+  width: 50%;
+  margin: auto;
+}
+
+.banner-main-text h6 {
+  font-size: 23px;
+  letter-spacing: 1px;
+  margin: 20px 0;
+}
+
+.banner-content-description {
+  text-align: center;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.banner-content-description,
+.banner-main-text h6 {
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+}
+
+.banner-input {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.emailBar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrap-email-text {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+}
+
+.wrap-input {
+  width: 100%;
+  max-width: 450px;
+  padding: 0 12px;
+  height: 58px;
+  outline: none;
+  border: none;
+}
+
+.wrap-input-placeholde {
+  font-weight: 400;
+  font-size: 19px;
+  font-family: "Montserrat", sans-serif;
+  color: #8c8c8c;
+  position: absolute;
+  left: 10px;
+}
+
+.btn {
+  padding: 13.15px 26px;
+  background-color: #e50914;
+  font-weight: 400;
+  font-size: 26px;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+}
