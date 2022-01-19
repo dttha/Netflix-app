@@ -1,5 +1,7 @@
 * {
   list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 a {
   text-decoration: none;
@@ -18,16 +20,32 @@ a {
   background-image: url(../../assets/images/banner1.jpg);
   background-size: cover;
   border-bottom: 8px solid #222;
+  position: relative;
+  height: 100vh;
+}
+
+.banner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  z-index: 1;
 }
 
 .container {
   padding-left: 60px;
   padding-right: 60px;
+  height: 85%;
 }
 
 .banner-content {
   position: relative;
   padding: 20px 0;
+  z-index: 2;
+  height: 100%;
 }
 
 .banner-content-header {
@@ -56,6 +74,10 @@ a {
 
 .banner-content-wrap-text {
   padding-bottom: 90px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
 }
 
 .banner-content-text {
@@ -111,7 +133,7 @@ a {
 .wrap-email-text {
   position: relative;
   width: 100%;
-  max-width: 450px;
+  max-width: 475px;
 }
 
 .wrap-input {
@@ -119,7 +141,6 @@ a {
   max-width: 450px;
   padding: 0 12px;
   height: 58px;
-  outline: none;
   border: none;
 }
 
@@ -130,6 +151,7 @@ a {
   color: #8c8c8c;
   position: absolute;
   left: 10px;
+  top: 30%;
 }
 
 .btn {
@@ -139,4 +161,202 @@ a {
   font-size: 26px;
   font-family: "Montserrat", sans-serif;
   color: #fff;
+}
+
+.feature-content-page,
+.question {
+  border-bottom: 8px solid #222;
+}
+
+.feature-content-page {
+  padding: 25px 50px;
+}
+
+.feature-content-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.feature-content-text {
+  margin: auto;
+  width: 43%;
+  padding: 20px;
+}
+
+.feature-content-text-title {
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.feature-content-text-desc {
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  margin-top: 18px;
+}
+
+.feature-content-media {
+  margin: auto;
+  width: 43%;
+  position: relative;
+}
+
+.feature-content-media img {
+  position: relative;
+  z-index: 2;
+}
+
+.feature-content-video {
+  position: absolute;
+  height: 100%;
+  top: -2%;
+  left: 13%;
+  max-width: 73%;
+  z-index: 1;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+}
+
+.question-wrap {
+  padding: 0 60px;
+}
+
+.question-content {
+  padding: 45px 0;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.question-content-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.question-content-dropdown {
+  width: 55%;
+  margin: 6px 0;
+}
+
+.question-main {
+  display: flex;
+  background-color: #303030;
+  padding: 15px 20px;
+  justify-content: space-between;
+}
+
+.faq-answer {
+  background-color: #303030;
+}
+
+.question-main h6 {
+  font-size: 22px;
+  font-weight: 400;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  text-align: left;
+}
+
+.question-email-title {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
+  margin: 18px 0;
+}
+
+.question-email {
+  margin-bottom: 45px;
+  text-align: center;
+}
+
+.footer-content {
+  padding: 30px 170px 80px;
+}
+
+.footer-title {
+  font-size: 16px;
+  font-weight: 400;
+  color: #757575;
+  font-family: "Montserrat", sans-serif;
+}
+
+.footer-list-category {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.footer-text {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
+  color: #757575;
+  padding: 5px 30px 5px 0;
+}
+
+.footer-col-text {
+  padding: 20px 0;
+}
+
+.footer-col {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+.footer-brand {
+  font-size: 12px;
+  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
+  color: #757575;
+}
+
+@media (max-width: 800px) {
+  .emailBar {
+    flex-direction: column;
+  }
+
+  .btn {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 12px 24px;
+  }
+
+  .question-main h6 {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1110px) {
+  .footer-col {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 1150px) {
+  .question-content-dropdown {
+    width: 85%;
+  }
+
+  .question-main h6 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .question-content-dropdown {
+    width: 100%;
+  }
 }
