@@ -58,6 +58,7 @@ a {
   margin: 30px auto 60px;
   max-width: 380px;
   padding: 20px 55px;
+  width: 100%;
 }
 
 .form-title {
@@ -118,52 +119,4 @@ a {
   font-size: 12px;
   font-family: "Montserrat", sans-serif;
   color: #8c8c8c;
-}
-
-.footer-content {
-  padding: 30px 170px 80px;
-}
-
-.footer-title {
-  font-size: 16px;
-  font-weight: 400;
-  color: #757575;
-  font-family: "Montserrat", sans-serif;
-}
-
-.footer-list-category {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.footer-text {
-  font-size: 14px;
-  font-weight: 400;
-  font-family: "Montserrat", sans-serif;
-  color: #757575;
-  padding: 5px 30px 5px 0;
-}
-
-.footer-col-text {
-  padding: 20px 0;
-}
-
-.footer-col {
-  flex: 0 0 25%;
-  max-width: 25%;
-}
-
-.footer-brand {
-  font-size: 12px;
-  font-weight: 400;
-  font-family: "Montserrat", sans-serif;
-  color: #757575;
-}
-
-@media (max-width: 1110px) {
-  .footer-col {
-    flex: 50%;
-    max-width: 50%;
-  }
 }

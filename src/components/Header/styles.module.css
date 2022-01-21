@@ -1,0 +1,84 @@
+.home-header {
+  padding: 10px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1920px;
+  position: fixed;
+  z-index: 999;
+  width: 90%;
+}
+
+.home-header-content-left {
+  display: flex;
+  align-items: center;
+}
+
+.home-header-content-logo {
+  font-size: 40px;
+  color: #e50914;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 1px;
+}
+
+.home-header-menu {
+  margin-left: 20px;
+}
+
+.home-header-menu-link {
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+}
+
+.home-header-menu-link-active {
+  color: #b3b3b3;
+}
+
+.home-header-content-right {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.home-header-search-icon {
+  display: flex;
+  align-items: center;
+}
+
+.home-header-avata-group {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 0;
+  position: relative;
+}
+
+.home-header-avata {
+  width: 35px;
+  height: 35px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.home-header-username {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  margin-left: 8px;
+}
+
+.home-header-span-down {
+  position: absolute;
+  right: -15px;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #fff;
+  border-width: 5px 5px 0;
+}
