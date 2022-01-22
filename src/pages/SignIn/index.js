@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Input from '../../components/Input';
 import styles from './styles.module.css'
@@ -24,6 +25,7 @@ const SignIn = () => {
                             <Input label="Username or phone" value={username} onChange={setUsername} styleInput={{ backgroundColor: "#303030", borderRadius: 4 }} styleContainer={{ maxWidth: "356px" }} />
                             <Input label="Password" type={showPassword ? "text" : "password"} value={password} onChange={setPassword} styleInput={{ backgroundColor: "#303030", borderRadius: 4 }} styleContainer={{ maxWidth: "356px", marginTop: "15px" }} rightComponent={<div onClick={() => setShowPassword(!showPassword)}>SHOW</div>} />
                             <div className={styles["login-content-btn"]}>
+                                {/* <Link className={styles["p-font"]} to="/home">Sign In</Link> */}
                                 <p className={styles["p-font"]}>Sign In</p>
                             </div>
                             <p className={styles["login-content-register"]}>

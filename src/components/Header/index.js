@@ -9,7 +9,7 @@ const Header = () => {
         const header = document.getElementById("nav")
         window.addEventListener("scroll", (e) => {
             console.log(window.scrollY)
-            header.style.background = `rgba(4, 6, 60,${window.scrollY / 500})`
+            header.style.background = `rgba(0, 0, 0,${window.scrollY / 500})`
         })
         const btnMenu = document.getElementById("btn-menu")
         const menu = document.getElementById("home-header-menu-open")

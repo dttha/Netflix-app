@@ -7,6 +7,7 @@ import film1 from "../../assets/images/film1.png"
 import Input from '../../components/Input'
 import Collapse from '../../components/Collapse';
 import Footer from '../../components/Footer';
+import { Link } from 'react-router-dom';
 const StartHome = () => {
     const [value, setValue] = useState('');
 
@@ -21,7 +22,7 @@ const StartHome = () => {
                     <div className={styles["banner-content"]}>
                         <div className={styles["banner-content-header"]}>
                             <a href="#" className={styles["logo"]}>Netflix</a>
-                            <a href="#sign-in" className={styles["banner-content-signin"]}>Sign in</a>
+                            <Link className={styles["banner-content-signin"]} to="/sign-in">Sign in</Link>
                         </div>
 
                         <div className={styles["banner-content-wrap-text"]}>

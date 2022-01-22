@@ -1,0 +1,31 @@
+.home-category {
+  z-index: 8;
+  margin-bottom: 40px;
+}
+
+.container {
+  padding-left: 60px;
+  padding-right: 60px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-category-type {
+  font-weight: 600;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 992px) {
+  .wrapper {
+    top: 0;
+  }
+
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

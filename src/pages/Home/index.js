@@ -1,6 +1,6 @@
 import React from 'react';
 import Banner from '../../components/Banner';
-import Content from '../../components/Content';
+import ContentHome from '../../components/ContentHome';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import styles from './styles.module.css'
@@ -10,7 +10,7 @@ const Home = () => {
         <div className={styles["wrapper"]} id="home">
             <Header />
             <Banner />
-            <Content />
+            <ContentHome />
             <Footer />
         </div>
     )
