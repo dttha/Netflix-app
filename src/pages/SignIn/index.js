@@ -4,10 +4,10 @@ import Input from '../../components/Input';
 import styles from './styles.module.css'
 
 const SignIn = () => {
-    const [value, setValue] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    useEffect(() => {
-    }, [value])
+    const [showPassword, setShowPassword] = useState(false);
 
     const [visible, setVisible] = useState(false);
 
@@ -21,8 +21,8 @@ const SignIn = () => {
                         </div>
                         <div className={styles["login-content-form"]}>
                             <h6 className={styles["form-title"]}>Sign In</h6>
-                            <Input label="Username or phone" value={value} onChange={setValue} styleInput={{ backgroundColor: "#303030", borderRadius: 4 }} styleContainer={{ maxWidth: "356px" }} />
-                            <Input label="Password" value={value} onChange={setValue} styleInput={{ backgroundColor: "#303030", borderRadius: 4 }} styleContainer={{ maxWidth: "356px", marginTop: "15px" }} />
+                            <Input label="Username or phone" value={username} onChange={setUsername} styleInput={{ backgroundColor: "#303030", borderRadius: 4 }} styleContainer={{ maxWidth: "356px" }} />
+                            <Input label="Password" type={showPassword ? "text" : "password"} value={password} onChange={setPassword} styleInput={{ backgroundColor: "#303030", borderRadius: 4 }} styleContainer={{ maxWidth: "356px", marginTop: "15px" }} rightComponent={<div onClick={() => setShowPassword(!showPassword)}>SHOW</div>} />
                             <div className={styles["login-content-btn"]}>
                                 <p className={styles["p-font"]}>Sign In</p>
                             </div>
@@ -37,7 +37,8 @@ const SignIn = () => {
                                 <span className={styles["login-span"]}> Sign up now.</span>
                             </p>
                             <p className={styles["login-content-more"]}>This page is protected by Google reCAPTCHA to ensure you're not a bot.
-                                <span className={styles["login-span"]} onClick={() => setVisible(true)}> Learn more.</span>
+                                {!visible && <span className={styles["login-span"]} onClick={() => setVisible(true)}> Learn more.</span>}
+
                             </p>
                             {visible && <p className={styles["login-content-policy"]}>The information collected by Google reCAPTCHA is subject to the Google Privacy Policy and Terms of Service, and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is not used for personalized advertising by Google).</p>}
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './styles.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faSearch, faSortDown } from '@fortawesome/free-solid-svg-icons'
 import avata from '../../assets/images/avata.jpg'
 
 const Header = () => {
@@ -14,7 +14,7 @@ const Header = () => {
         const btnMenu = document.getElementById("btn-menu")
         const menu = document.getElementById("home-header-menu-open")
         btnMenu.addEventListener("click", () => {
-            menu.classList.toggle("open")
+            menu.classList.toggle(styles["open"])
         })
     }, [])
 
@@ -69,8 +69,8 @@ const Header = () => {
                             <div className={styles["home-header-avata"]}>
                                 <img src={avata} style={{ display: "block", width: "100%" }}></img>
                             </div>
-                            <span className={styles["home-header-span-down"]}></span>
                             <p className={styles["home-header-username"]} >Thu Hà</p>
+                            <FontAwesomeIcon icon={faSortDown} className={styles["home-header-span-down"]}></FontAwesomeIcon>
                             <div className={styles["home-header-dropdown"]}>
                                 <a className={styles["home-header-detail"]} href="#">
                                     <span>Account</span>

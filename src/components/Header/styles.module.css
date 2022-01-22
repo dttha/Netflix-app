@@ -89,14 +89,19 @@
 }
 
 .home-header-span-down {
-  position: absolute;
-  right: -15px;
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid #fff;
-  border-width: 5px 5px 0;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  color: #fff;
+  transition: 0.5s;
+}
+
+.home-header-avata-group:hover .home-header-span-down {
+  transform: rotateX(180deg) translateY(-50%);
+}
+
+.home-header-avata-group:hover .home-header-dropdown {
+  visibility: visible;
+  opacity: 1;
 }
 
 .nav-icon {
@@ -172,12 +177,12 @@
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.55);
   border: 1px solid hsla(0, 3%, 38%, 0.15);
-  right: -15px;
+  right: 5px;
   left: 0;
   top: 100%;
   padding: 5px 30px 5px 10px;
-  /* visibility: hidden;
-  opacity: 0; */
+  visibility: hidden;
+  opacity: 0;
 }
 
 @media (max-width: 992px) {

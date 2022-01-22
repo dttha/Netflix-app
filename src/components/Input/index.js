@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styles from './styles.module.css'
-function Input({ value, onChange, styleContainer, styleInput, styleLabel, label, ...props }) {
+function Input({ value, onChange, styleContainer, styleInput, styleLabel, label, rightComponent, ...props }) {
     const [state, setState] = useState('')
     const keyInput = useRef("input-" + Math.random())
     const labelRef = useRef()
@@ -35,11 +35,13 @@ function Input({ value, onChange, styleContainer, styleInput, styleLabel, label,
         <input {...props}
             style={styleInput ?? {}}
             className={styles["wrap-input"]}
-            type="text"
             id={keyInput.current}
             value={valueInput}
             onChange={changeState}
         />
+        {rightComponent && <div className={styles["wrap-right"]}>
+            {rightComponent}
+        </div>}
         <label style={styleLabel ?? {}} ref={labelRef} htmlFor={keyInput.current} className={styles["wrap-input-placeholde"]}>{label}</label>
     </div>
 }

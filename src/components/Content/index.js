@@ -3,7 +3,10 @@ import styles from './styles.module.css'
 
 const Content = () => {
     return (
-        <div>avvvvv</div>
+        <div>
+            avvvvv
+
+        </div>
     )
 }
 

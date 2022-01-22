@@ -68,6 +68,10 @@
   border-radius: 4px;
 }
 
+.btn-trailer:hover {
+  background-color: hsla(0, 0%, 100%, 0.603);
+}
+
 .btn-more-info {
   color: #fff;
   background-color: #757575;
@@ -80,10 +84,14 @@
   margin-left: 10px;
 }
 
+.btn-more-info:hover {
+  background-color: rgba(172, 168, 168, 0.459);
+}
+
 @media (max-width: 600px) {
   .home-banner-content {
-    padding-top: 120px;
-    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 50px;
   }
 
   .home-banner-title {
@@ -98,7 +106,7 @@
 
 @media (max-width: 700px) {
   .home-banner-title {
-    font-size: 55px;
+    font-size: 40px;
   }
 
   .home-banner-desc {
