@@ -1,9 +1,6 @@
 .itemBox {
-  margin: 0 2px;
   position: relative;
   cursor: pointer;
-  overflow: hidden;
-  border-radius: 4px;
 }
 
 .wrap-itemBox {
@@ -29,6 +26,7 @@
   max-height: 150px;
   display: block;
   width: 100%;
+  border-radius: 4px;
 }
 
 .itemBox-title {

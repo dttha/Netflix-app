@@ -1,0 +1,94 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999999;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  justify-content: center;
+}
+
+.detail-film {
+  width: 60vw;
+  height: 30px;
+  background-color: rgba(255, 255, 255);
+  margin-top: 30px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.detail-film-background-img {
+  background-image: linear-gradient(
+      0deg,
+      rgb(0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    url("https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//k2twTjSddgLc1oFFHVibfxp2kQV.jpg");
+  background-size: cover;
+  background-position: 50%;
+  position: relative;
+}
+
+.detail-film-title {
+  padding-top: 300px;
+  padding-left: 40px;
+  padding-bottom: 50px;
+}
+
+.detail-film-name {
+  color: #fff;
+  font-size: 40px;
+  font-family: "Archivo Black", sans-serif;
+}
+
+.detail-film-btn {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.btn-trailer {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  color: #000;
+  background-color: #fff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-trailer:hover {
+  background-color: hsla(0, 0%, 100%, 0.603);
+}
+
+.detail-film-btn-feel {
+  display: flex;
+  align-items: center;
+}
+
+.btn-like,
+.btn-rate {
+  border: 2px solid rgb(204, 202, 202);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(42, 42, 42, 0.6);
+  position: relative;
+  margin-left: 15px;
+}
+
+.btn-close {
+  position: absolute;
+  background-color: #181818;
+  top: 20px;
+  right: 15px;
+  border-radius: 50%;
+  padding: 5px 10px;
+}

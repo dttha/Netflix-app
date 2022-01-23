@@ -15,7 +15,7 @@ const Banner = () => {
                         </p>
                         <div className={styles["home-banner-btn"]}>
                             <div className={styles["btn-trailer"]}>
-                                <FontAwesomeIcon icon={faCaretRight} style={{ marginRight: 10 }}></FontAwesomeIcon>
+                                <FontAwesomeIcon icon={faCaretRight} style={{ marginRight: 10, fontSize: 20 }}></FontAwesomeIcon>
                                 <span>Trailer</span>
                             </div>
                             <a className={styles["btn-more-info"]} href="#">

@@ -2,13 +2,11 @@ import React from 'react';
 import SingleFilm from '../SingleFilm';
 import styles from './styles.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import Navigation from 'swiper/css/navigation';
-import Pagination from 'swiper/css/pagination';
-import Scrollbar from 'swiper/css/scrollbar';
-import A11y from 'swiper/css/a11y';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-const Category = () => {
+const Category = ({ data }) => {
     return (
         <div className={styles["home-wrap-category"]}>
             <div className={styles["home-category"]}>
@@ -17,35 +15,38 @@ const Category = () => {
                     <div className={styles["home-category-content"]}>
                         <Swiper
                             modules={[Navigation, Pagination, Scrollbar, A11y]}
-                            spaceBetween={0}
-                            slidesPerView={3}
+                            spaceBetween={8}
+                            slidesPerView={5}
+                            pagination={{
+                                clickable: true,
+                            }}
+                            className={styles["swiper-container"] + " swiper-container"}
                             navigation
-                            pagination={{ clickable: true }}
-                            scrollbar={{ draggable: true }}
-                            onSwiper={(swiper) => console.log(swiper)}
-                            onSlideChange={() => console.log('slide change')}
+                            breakpoints={{
+                                0: {
+                                    slidesPerView: 1,
+                                    spaceBetween: 8
+                                },
+                                400: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 8
+                                },
+                                800: {
+                                    slidesPerView: 4,
+                                    spaceBetween: 8
+                                },
+                                992: {
+                                    slidesPerView: 5,
+                                    spaceBetween: 8
+                                }
+                            }
+                            }
                         >
-                            <SwiperSlide>
-                                <a href="#/home/movie/524434">
-                                    <SingleFilm></SingleFilm>
-                                </a>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <a href="#/home/movie/524434">
-                                    <SingleFilm></SingleFilm>
-                                </a>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <a href="#/home/movie/524434">
-                                    <SingleFilm></SingleFilm>
-                                </a>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <a href="#/home/movie/524434">
-                                    <SingleFilm></SingleFilm>
-                                </a>
-                            </SwiperSlide>
-
+                            {data && data.map((item) => {
+                                return <SwiperSlide>
+                                    <SingleFilm singleFilm={item}></SingleFilm>
+                                </SwiperSlide>
+                            })}
                         </Swiper>
                     </div>
                 </div>

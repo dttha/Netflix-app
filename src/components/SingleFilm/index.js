@@ -1,13 +1,12 @@
 import React from 'react';
 import styles from './styles.module.css'
-import singleFilm1 from '../../assets/images/singleFilm1.jpg'
 
-const SingleFilm = () => {
+const SingleFilm = ({ singleFilm }) => {
     return (
         <div className={styles["itemBox"]}>
             <div className={styles["wrap-itemBox"]}>
-                <img className={styles["itemBox-img"]} src={singleFilm1}></img>
-                <p className={styles["itemBox-title"]}>Eternals</p>
+                <img className={styles["itemBox-img"]} src={singleFilm.image}></img>
+                <p className={styles["itemBox-title"]}>{singleFilm.title}</p>
             </div>
         </div>
     )
