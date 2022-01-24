@@ -5,10 +5,8 @@
   left: 0;
   right: 0;
   z-index: 999999;
-  overflow-y: auto;
+  overflow-y: scroll;
   background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
 }
 
 .detail-film {
@@ -19,6 +17,8 @@
   border-radius: 4px;
   position: relative;
   z-index: 1000;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .detail-film-background-img {
@@ -225,4 +225,62 @@
 
 .detail-film-info-genres {
   margin-top: 15px;
+}
+
+.wrapper .open {
+  display: flex;
+}
+
+.detail-film-recommend {
+  display: block;
+  max-height: 150vh;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.detail-film-recommend-title {
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.detail-film-recommend-item {
+  display: flex;
+  margin-top: 15px;
+}
+
+.add {
+  max-height: none;
+}
+
+.wrap-detail-film-final {
+  padding-bottom: 30px;
+}
+
+.wrap-detail-film-final-more-info {
+  font-size: 20px;
+  margin-top: 35px;
+  position: relative;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+}
+
+@media (max-width: 992px) {
+  .detail-film {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 650px) {
+  .detail-film-info {
+    flex-direction: column;
+  }
+
+  .detail-film-info-right {
+    padding-left: 0;
+  }
 }
