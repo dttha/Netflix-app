@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './styles.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 
 const Banner = () => {
     return (
@@ -18,10 +19,11 @@ const Banner = () => {
                                 <FontAwesomeIcon icon={faCaretRight} style={{ marginRight: 10, fontSize: 20 }}></FontAwesomeIcon>
                                 <span>Trailer</span>
                             </div>
-                            <a className={styles["btn-more-info"]} href="#">
+                            <Link to="/home/movie/1" className={styles["btn-more-info"]}>
                                 <FontAwesomeIcon icon={faInfoCircle} style={{ marginRight: 10 }}></FontAwesomeIcon>
                                 <span>More info</span>
-                            </a>
+                            </Link>
+
                         </div>
                     </div>
                 </div>

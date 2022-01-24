@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from './styles.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretRight, faHeart, faStar, faTimes, faWindowClose } from '@fortawesome/free-solid-svg-icons'
+import { faCaretRight, faChevronDown, faChevronUp, faHeart, faStar, faTimes, faWindowClose } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import RecommendationCategory from '../RecommendationCategory';
 import { useState } from 'react/cjs/react.development';
 
 const DetailFilm = () => {
     const navigate = useNavigate()
-
+    const [visible, setVisible] = useState(false);
     useEffect(() => {
         const btnLike = document.getElementById("btn-like")
         const faHeart = document.getElementById("faHeart")
@@ -17,9 +17,9 @@ const DetailFilm = () => {
             faHeart.classList.toggle(styles["activeHeart"])
         })
         const btnRate = document.getElementById("btn-rate")
-        const faStar = document.getElementById("faStar")
+        const rating = document.getElementById("rating")
         btnRate.addEventListener("click", () => {
-            faStar.classList.toggle(styles["activeStar"])
+            rating.classList.toggle(styles["activeStar"])
         })
 
     }, [])
@@ -158,12 +158,7 @@ const DetailFilm = () => {
             desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
         },
     ]
-    // const modalRef = useRef();
-    // const closeModal = (e) => {
-    //     if (e.target === modalRef.current) {
-    //         navigate("/home")
-    //     }
-    // }
+
     return (
         <div className={styles["wrapper"]} onClick={() => {
             navigate("/home")
@@ -186,8 +181,9 @@ const DetailFilm = () => {
                                     <FontAwesomeIcon icon={faHeart} className={styles["faHeart"]} id="faHeart"></FontAwesomeIcon>
                                 </div>
                                 <div className={styles["btn-rate"]} id="btn-rate">
-                                    <FontAwesomeIcon icon={faStar} className={styles["faStar"]} id="faStar"></FontAwesomeIcon>
-                                    <div className={styles["rating"] + " " + styles["activeStar"]}>
+                                    <FontAwesomeIcon icon={faStar} className={styles["faStar"]}></FontAwesomeIcon>
+                                    {/* <span className={styles["btn-rate-value"]}></span> */}
+                                    <div className={styles["rating"]} id="rating">
                                         <FontAwesomeIcon icon={faWindowClose} className={styles["faWindowClose"]}></FontAwesomeIcon>
                                         <div className={styles["rating-group"]}>
                                             <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]} ></FontAwesomeIcon>
@@ -255,6 +251,12 @@ const DetailFilm = () => {
                             <RecommendationCategory data={data}></RecommendationCategory>
                             <RecommendationCategory data={data}></RecommendationCategory>
                             <RecommendationCategory data={data}></RecommendationCategory>
+                        </div>
+                    </div>
+                    <div className={styles["detail-film-recommend-more-btn"]}>
+                        <div className={styles["detail-film-recommend-more-wrap-icon"]}>
+                            {!visible && <FontAwesomeIcon icon={faChevronDown} className={styles["faChevronDown"]} onClick={() => setVisible(true)}></FontAwesomeIcon>}
+                            {visible && <FontAwesomeIcon icon={faChevronUp} className={styles["faChevronUp"]} onClick={() => setVisible(false)}></FontAwesomeIcon>}
                         </div>
                     </div>
                 </div>

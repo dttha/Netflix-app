@@ -55,7 +55,7 @@ input[type="text"]:focus {
 }
 
 .swiper-button-next {
-  right: 0 !important;
+  right: -60px !important;
 }
 .swiper-button-prev {
   left: -60px !important;

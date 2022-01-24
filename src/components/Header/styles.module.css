@@ -63,6 +63,7 @@
 .home-header-search-icon {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .home-header-avata-group {

@@ -3,6 +3,8 @@ import styles from './styles.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faSearch, faSortDown } from '@fortawesome/free-solid-svg-icons'
 import avata from '../../assets/images/avata.jpg'
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const Header = () => {
     useEffect(() => {
@@ -33,10 +35,12 @@ const Header = () => {
                                     </div>
                                     <p className={styles["home-header-username"]} >Thu Hà</p>
                                 </div>
-                                <a className={styles["home-header-detail"]} href="#">
+                                <Link to="/account" className={styles["home-header-detail"]}>
                                     <span>Account</span>
-                                </a>
-                                <p className={styles["home-header-logout-mobile"]}>Log out</p>
+                                </Link>
+                                <Link to="/">
+                                    <p className={styles["home-header-logout-mobile"]}>Log out</p>
+                                </Link>
                             </div>
                             <ul className={styles["home-header-menu-mobile"]}>
                                 <a href="#home" className={styles["home-header-menu-link"] + " " + styles["home-header-menu-link-active"]}>Home</a>
@@ -49,16 +53,11 @@ const Header = () => {
                             Netflix
                         </div>
                         <ul className={styles["home-header-menu"]} id="home-header-menu">
-                            <a href="#home" className={styles["home-header-menu-link"] + " " + styles["home-header-menu-link-active"]}>Home</a>
-                            <a href="#tvshow" className={styles["home-header-menu-link"]}>Tv shows</a>
-                            <a href="#movie" className={styles["home-header-menu-link"]}>Movies</a>
-                            <a href="#favorite" className={styles["home-header-menu-link"]}>Favorite</a>
+                            <Link to="/home" className={styles["home-header-menu-link"] + " " + styles["home-header-menu-link-active"]}>Home</Link>
+                            <Link to="/tvshow" className={styles["home-header-menu-link"]}>Tv shows</Link>
+                            <Link to="/movie" className={styles["home-header-menu-link"]}>Movies</Link>
+                            <Link to="/favorite" className={styles["home-header-menu-link"]}>Favorite</Link>
                         </ul>
-                    </div>
-                    <div className={styles["home-mobile-search-group"]}>
-                        <FontAwesomeIcon icon={faSearch} style={{ color: "#fff", padding: 5 }}></FontAwesomeIcon>
-                        <input placeholder={"Movie, Tvshow, Actor"} type="text" style={{ color: "#fff", padding: "2px 8px", outline: "none", border: "none", backgroundColor: "rgba(0,0,0,0)" }}></input>
-                        <button className={styles["mobile-btn-search"]}>Search</button>
                     </div>
                     <div className={styles["home-header-content-right"]}>
                         <div className={styles["home-header-search-icon"]}>
@@ -71,14 +70,19 @@ const Header = () => {
                             <p className={styles["home-header-username"]} >Thu Hà</p>
                             <FontAwesomeIcon icon={faSortDown} className={styles["home-header-span-down"]}></FontAwesomeIcon>
                             <div className={styles["home-header-dropdown"]}>
-                                <a className={styles["home-header-detail"]} href="#">
+                                <Link to="/account" className={styles["home-header-detail"]}>
                                     <span>Account</span>
-                                </a>
-                                <p className={styles["home-header-detail"]}>
+                                </Link>
+                                <Link to="/" className={styles["home-header-detail"]}>
                                     <span>Log out</span>
-                                </p>
+                                </Link>
                             </div>
                         </div>
+                    </div>
+                    <div className={styles["home-mobile-search-group"]}>
+                        <FontAwesomeIcon icon={faSearch} style={{ color: "#fff", padding: 5 }}></FontAwesomeIcon>
+                        <input placeholder={"Movie, Tvshow, Actor"} type="text" style={{ color: "#fff", padding: "2px 8px", outline: "none", border: "none", backgroundColor: "rgba(0,0,0,0)" }}></input>
+                        <button className={styles["mobile-btn-search"]}>Search</button>
                     </div>
                 </div>
 

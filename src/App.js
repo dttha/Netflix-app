@@ -8,6 +8,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import DetailFilm from './components/DetailFilm';
+import Account from './pages/Account';
+import TvShow from './pages/TvShow';
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
         <Route path="home" element={<Home />}>
           <Route path="movie/:id" element={<DetailFilm />}></Route>
         </Route>
+        <Route path="/account" element={<Account />}></Route>
+        <Route path="tvshow" element={<TvShow />}></Route>
+
       </Routes>
     </BrowserRouter>
   );

@@ -6,6 +6,7 @@
 .container {
   padding-left: 60px;
   width: 100%;
+  padding-right: 60px;
   box-sizing: border-box;
 }
 
