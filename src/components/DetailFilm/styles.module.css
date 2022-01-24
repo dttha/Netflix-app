@@ -7,18 +7,18 @@
   z-index: 999999;
   overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.7);
-
   display: flex;
   justify-content: center;
 }
 
 .detail-film {
   width: 60vw;
-  height: 30px;
-  background-color: rgba(255, 255, 255);
+  overflow: hidden;
+  background-color: #000;
   margin-top: 30px;
   border-radius: 4px;
   position: relative;
+  z-index: 1000;
 }
 
 .detail-film-background-img {
@@ -91,4 +91,138 @@
   right: 15px;
   border-radius: 50%;
   padding: 5px 10px;
+  cursor: pointer;
+}
+
+.faHeart {
+  position: absolute;
+  top: 28%;
+  left: 27%;
+  color: #e50914;
+  font-size: 20px;
+}
+
+.activeHeart {
+  color: #fff !important;
+}
+
+.faStar {
+  position: absolute;
+  top: 25%;
+  left: 24%;
+  color: #fff;
+  font-size: 20px;
+}
+
+.activeStar {
+  opacity: 1;
+  visibility: visible;
+}
+
+.rating {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  background-color: #3f3f3f;
+  top: 100%;
+  margin-top: 10px;
+  display: flex;
+  padding: 7px 5px;
+}
+
+.faWindowClose {
+  margin-left: 5px;
+  margin-right: 10px;
+  transition: 0.5s;
+  color: #fff;
+  font-size: 20px;
+}
+
+.faWindowClose:hover {
+  color: #757373;
+}
+
+.rating-group {
+  position: relative;
+  display: flex;
+}
+
+.faStar-group {
+  padding: 0 3px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.rating-group:hover .faStar-group {
+  color: #f7d411;
+}
+
+.rating-group:hover ~ .faStar-group {
+  color: #fff;
+}
+
+.wrap-detail-film-info {
+  padding: 0 40px;
+}
+
+.detail-film-info {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.detail-film-info-left {
+  width: 100%;
+}
+
+.detail-film-info-date {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+}
+
+.detail-film-info-date-release {
+  margin-right: 10px;
+}
+
+.detail-film-info-rating {
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.detail-film-info-desc {
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  line-height: 22px;
+}
+
+.detail-film-info-right {
+  padding-left: 20px;
+}
+
+.detail-film-info-title {
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: #777;
+}
+
+.detail-film-info-name {
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+}
+
+.detail-film-info-genres {
+  margin-top: 15px;
 }

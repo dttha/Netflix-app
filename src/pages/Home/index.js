@@ -1,7 +1,7 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import Banner from '../../components/Banner';
 import ContentHome from '../../components/ContentHome';
-import DetailFilm from '../../components/DetailFilm';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import styles from './styles.module.css'
@@ -12,8 +12,8 @@ const Home = () => {
             <Header />
             <Banner />
             <ContentHome />
-            <DetailFilm />
             <Footer />
+            <Outlet />
         </div>
     )
 }

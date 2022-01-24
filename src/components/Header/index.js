@@ -8,7 +8,6 @@ const Header = () => {
     useEffect(() => {
         const header = document.getElementById("nav")
         window.addEventListener("scroll", (e) => {
-            console.log(window.scrollY)
             header.style.background = `rgba(0, 0, 0,${window.scrollY / 500})`
         })
         const btnMenu = document.getElementById("btn-menu")
