@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../../components/Header';
 import styles from './styles.module.css'
 import avata from "../../assets/images/avata.jpg"
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import Footer from '../../components/Footer';
 
 const Account = () => {
@@ -44,7 +44,7 @@ const Account = () => {
                                 <span className={styles["upcoming-title"]}>Checkout New Movie</span>
                                 <div className={styles["upcoming-movie"]}>
                                     <div className={styles["movie-image"]}>
-                                        <Link to="/home/movie/1" >
+                                        <Link to="/account/movie/1" >
                                             <img style={{ width: "100%", display: "block" }} src="https://themoviedb.org/t/p/w355_and_h200_multi_faces//aWeKITRFbbwY8txG5uCj4rMCfSP.jpg"></img>
                                         </Link>
                                     </div>
@@ -64,6 +64,7 @@ const Account = () => {
                 </div>
             </div>
             <Footer />
+            <Outlet />
         </div>
     );
 }

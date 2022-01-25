@@ -10,16 +10,12 @@ import { useState } from 'react/cjs/react.development';
 const DetailFilm = () => {
     const navigate = useNavigate()
     const [visible, setVisible] = useState(false);
+    const [isActive, setActive] = useState(false);
     useEffect(() => {
         const btnLike = document.getElementById("btn-like")
         const faHeart = document.getElementById("faHeart")
         btnLike.addEventListener("click", () => {
             faHeart.classList.toggle(styles["activeHeart"])
-        })
-        const btnRate = document.getElementById("btn-rate")
-        const rating = document.getElementById("rating")
-        btnRate.addEventListener("click", () => {
-            rating.classList.toggle(styles["activeStar"])
         })
 
     }, [])
@@ -161,7 +157,7 @@ const DetailFilm = () => {
 
     return (
         <div className={styles["wrapper"]} onClick={() => {
-            navigate("/home")
+            navigate(-1)
         }}>
             {/* ngăn sự kiện sủi bọt trong các thành phần lồng nhau khi nhấp chuột */}
             <div className={styles["detail-film"]} onClick={(e) => {
@@ -180,10 +176,11 @@ const DetailFilm = () => {
                                 <div className={styles["btn-like"]} id="btn-like">
                                     <FontAwesomeIcon icon={faHeart} className={styles["faHeart"]} id="faHeart"></FontAwesomeIcon>
                                 </div>
-                                <div className={styles["btn-rate"]} id="btn-rate">
+                                <div className={styles["btn-rate"]} onClick={() => setActive(true)}>
                                     <FontAwesomeIcon icon={faStar} className={styles["faStar"]}></FontAwesomeIcon>
-                                    {/* <span className={styles["btn-rate-value"]}></span> */}
-                                    <div className={styles["rating"]} id="rating">
+                                    <div className={!isActive ? styles["rating"] : styles["rating"] + " " + styles["activeStar"]} onClick={(e) => {
+                                        e.stopPropagation()
+                                    }}>
                                         <FontAwesomeIcon icon={faWindowClose} className={styles["faWindowClose"]}></FontAwesomeIcon>
                                         <div className={styles["rating-group"]}>
                                             <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]} ></FontAwesomeIcon>
@@ -203,7 +200,7 @@ const DetailFilm = () => {
                         </div>
                     </div>
                     <div className={styles["btn-close"]} onClick={() => {
-                        navigate("/home")
+                        navigate(-1)
                     }}>
                         <FontAwesomeIcon icon={faTimes} style={{ color: "white", fontSize: "30px" }}></FontAwesomeIcon>
                     </div>
@@ -247,11 +244,7 @@ const DetailFilm = () => {
                 <div className={styles["wrap-detail-film-info"]}>
                     <div className={styles["detail-film-recommend"]}>
                         <span className={styles["detail-film-recommend-title"]}>Recommendation</span>
-                        <div className={styles["detail-film-recommend-item"]}>
-                            <RecommendationCategory data={data}></RecommendationCategory>
-                            <RecommendationCategory data={data}></RecommendationCategory>
-                            <RecommendationCategory data={data}></RecommendationCategory>
-                        </div>
+                        <RecommendationCategory data={data}></RecommendationCategory>
                     </div>
                     <div className={styles["detail-film-recommend-more-btn"]}>
                         <div className={styles["detail-film-recommend-more-wrap-icon"]}>

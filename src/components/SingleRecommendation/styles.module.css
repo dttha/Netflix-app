@@ -8,7 +8,6 @@
   background-position: 50%;
   background-size: cover;
   padding-bottom: 30px;
-  padding-top: 90px;
 }
 
 /* .recommendation-img {
@@ -32,7 +31,6 @@
 
 .recommendation-img {
   max-width: 100%;
-  max-height: 150px;
   display: block;
   width: 100%;
   border-radius: 4px;

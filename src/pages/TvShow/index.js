@@ -1,24 +1,42 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react/cjs/react.development';
 import Banner from '../../components/Banner';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import styles from './styles.module.css'
 
 const TvShow = () => {
+    const [isActive, setActive] = useState(false);
+    useEffect(() => {
+        // window.addEventListener("scroll", (e) => {
+        //     header.style.background = `rgba(0, 0, 0,${window.scrollY / 500})`
+        // })
+        const genres = document.getElementById("genres")
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 0) {
+                genres.classList.add(styles["genres-add"])
+            } else {
+                genres.classList.remove(styles["genres-add"])
+            }
+        })
+    }, [])
+
     return (
-        <div className={styles["wrapper"]}>
+        <div className={styles["wrapper"]} >
             <Header />
-            <div className={styles["genres"]}>
+            <div className={styles["genres"]} id="genres">
                 <div className={styles["container"]}>
                     <div className={styles["wrap-genres"]}>
                         <h5 className={styles["type"]}>Tv show</h5>
-                        <div className={styles["genres-select"]}>
+                        <div className={styles["genres-select"]} id="genres-select" onClick={() => setActive(!isActive)} onBlur={() => setActive(false)} tabIndex={0}>
                             <span className={styles["genres-span"]}>Genres</span>
                             <FontAwesomeIcon icon={faCaretDown} style={{ color: "white" }}></FontAwesomeIcon>
-                            <ul className={styles["genres-list"]}>
+                            <ul className={!isActive ? styles["genres-list"] : styles["genres-list"] + " " + styles["add"]} onClick={(e) => {
+                                e.stopPropagation()
+                            }}>
                                 <Link className={styles["genres-link"]} to="/tvshow/:id">Action Adventure</Link>
                                 <Link className={styles["genres-link"]} to="/tvshow/:id">Animation</Link>
                                 <Link className={styles["genres-link"]} to="/tvshow/:id">Comedy</Link>

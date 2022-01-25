@@ -1,11 +1,13 @@
 import React from 'react';
 import SingleRecommendation from '../SingleRecommendation';
+import styles from './styles.module.css'
 
 const RecommendationCategory = ({ data }) => {
+    console.log(data, 'data');
     return (
-        <div>
+        <div className={styles["detail-film-recommend-item"]}>
             {data && data.map((item) => {
-                <SingleRecommendation singleRecommendation={item}></SingleRecommendation>
+                return <SingleRecommendation recommendationBox={item}></SingleRecommendation>
             })}
         </div>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import Category from '../Category';
+import SwiperHome from '../SwiperHome';
 import styles from './styles.module.css'
 
 const ContentHome = () => {
@@ -55,9 +55,9 @@ const ContentHome = () => {
     ]
     return (
         <div className={styles["wrapper"]}>
-            <Category data={data}></Category>
-            <Category data={data}></Category>
-            <Category data={data}></Category>
+            <SwiperHome data={data}></SwiperHome>
+            <SwiperHome data={data}></SwiperHome>
+            <SwiperHome data={data}></SwiperHome>
         </div>
     )
 }

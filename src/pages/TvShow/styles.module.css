@@ -4,6 +4,7 @@
   width: 100%;
   max-width: 1920px;
   z-index: 15;
+  transition: all 0.2s;
 }
 
 .container {
@@ -47,8 +48,8 @@
 }
 
 .genres-list {
-  opacity: 1;
-  visibility: visible;
+  opacity: 0;
+  visibility: hidden;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 50px;
@@ -60,10 +61,22 @@
   z-index: 300;
 }
 
+.add {
+  opacity: 1;
+  visibility: visible;
+}
+
+.genres-add {
+  z-index: 999999;
+  padding: 2% 0;
+  background-color: #0f0f0f;
+}
+
 .genres-link {
   padding: 10px auto;
   color: #fff;
   font-weight: 400;
   font-size: 14px;
   font-family: "Montserrat", sans-serif;
+  margin: 5px;
 }

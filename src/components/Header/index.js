@@ -3,7 +3,7 @@ import styles from './styles.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faSearch, faSortDown } from '@fortawesome/free-solid-svg-icons'
 import avata from '../../assets/images/avata.jpg'
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
 
 const Header = () => {
@@ -53,10 +53,10 @@ const Header = () => {
                             Netflix
                         </div>
                         <ul className={styles["home-header-menu"]} id="home-header-menu">
-                            <Link to="/home" className={styles["home-header-menu-link"] + " " + styles["home-header-menu-link-active"]}>Home</Link>
-                            <Link to="/tvshow" className={styles["home-header-menu-link"]}>Tv shows</Link>
-                            <Link to="/movie" className={styles["home-header-menu-link"]}>Movies</Link>
-                            <Link to="/favorite" className={styles["home-header-menu-link"]}>Favorite</Link>
+                            <NavLink to="/home" className={({ isActive }) => isActive ? `${styles['home-header-menu-link-active']} ${styles["home-header-menu-link"]}` : styles["home-header-menu-link"]}>Home</NavLink>
+                            <NavLink to="/tvshow" className={({ isActive }) => isActive ? `${styles['home-header-menu-link-active']} ${styles["home-header-menu-link"]}` : styles["home-header-menu-link"]}>Tv shows</NavLink>
+                            <NavLink to="/movie" className={({ isActive }) => isActive ? `${styles['home-header-menu-link-active']} ${styles["home-header-menu-link"]}` : styles["home-header-menu-link"]}>Movies</NavLink>
+                            <NavLink to="/favorite" className={({ isActive }) => isActive ? `${styles['home-header-menu-link-active']} ${styles["home-header-menu-link"]}` : styles["home-header-menu-link"]}>Favorite</NavLink>
                         </ul>
                     </div>
                     <div className={styles["home-header-content-right"]}>
@@ -84,10 +84,10 @@ const Header = () => {
                         <input placeholder={"Movie, Tvshow, Actor"} type="text" style={{ color: "#fff", padding: "2px 8px", outline: "none", border: "none", backgroundColor: "rgba(0,0,0,0)" }}></input>
                         <button className={styles["mobile-btn-search"]}>Search</button>
                     </div>
-                </div>
+                </div >
 
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

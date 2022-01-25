@@ -261,11 +261,6 @@
   margin-bottom: 10px;
 }
 
-.detail-film-recommend-item {
-  display: flex;
-  margin-top: 15px;
-}
-
 .add {
   max-height: none;
 }
