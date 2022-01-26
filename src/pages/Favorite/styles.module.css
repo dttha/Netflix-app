@@ -51,7 +51,16 @@
   z-index: 15;
 }
 
-.favorite-content {
+.favorite-content-movie {
+  padding-top: 30px;
+}
+
+.favorite-content-tv {
+  padding-top: 30px;
+  display: none;
+}
+
+.favorite-content-tv-add {
   padding-top: 30px;
 }
 

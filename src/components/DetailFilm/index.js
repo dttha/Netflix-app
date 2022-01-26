@@ -17,7 +17,15 @@ const DetailFilm = () => {
         btnLike.addEventListener("click", () => {
             faHeart.classList.toggle(styles["activeHeart"])
         })
-
+        const down = document.getElementById("faChevronDown")
+        const up = document.getElementById("faChevronUp")
+        let recommend = document.getElementById("detail-film-recommend")
+        down.addEventListener("click", () => {
+            recommend.classList.add(styles["detail-film-recommend-add"])
+        })
+        // up.addEventListener("click", () => {
+        // recommend.classList.remove(styles["detail-film-recommend-add"])
+        // })
     }, [])
 
     const data = [
@@ -242,14 +250,14 @@ const DetailFilm = () => {
                 </div>
                 {/* Category */}
                 <div className={styles["wrap-detail-film-info"]}>
-                    <div className={styles["detail-film-recommend"]}>
+                    <div className={styles["detail-film-recommend"]} id="detail-film-recommend">
                         <span className={styles["detail-film-recommend-title"]}>Recommendation</span>
                         <RecommendationCategory data={data}></RecommendationCategory>
                     </div>
                     <div className={styles["detail-film-recommend-more-btn"]}>
                         <div className={styles["detail-film-recommend-more-wrap-icon"]}>
-                            {!visible && <FontAwesomeIcon icon={faChevronDown} className={styles["faChevronDown"]} onClick={() => setVisible(true)}></FontAwesomeIcon>}
-                            {visible && <FontAwesomeIcon icon={faChevronUp} className={styles["faChevronUp"]} onClick={() => setVisible(false)}></FontAwesomeIcon>}
+                            {!visible && <FontAwesomeIcon icon={faChevronDown} id="faChevronDown" className={styles["faChevronDown"]} onClick={() => setVisible(true)}></FontAwesomeIcon>}
+                            {visible && <FontAwesomeIcon icon={faChevronUp} id="faChevronUp" className={styles["faChevronUp"]} onClick={() => setVisible(false)}></FontAwesomeIcon>}
                         </div>
                     </div>
                 </div>

@@ -2,17 +2,11 @@ import React from 'react';
 import styles from './styles.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { useEffect } from 'react/cjs/react.development';
+import { useEffect, useRef, useState } from 'react/cjs/react.development';
 
 const SingleRecommendation = ({ recommendationBox }) => {
-    useEffect(() => {
-        const btnLike = document.getElementById("btn-like-recommendation")
-        const faHeart = document.getElementById("faHeart-recommendation")
-        btnLike.addEventListener("click", () => {
-            faHeart.classList.toggle(styles["activeHeart-recommendation"])
-        })
-    }, [])
-
+    const btnId = useRef()
+    const [visible, setVisible] = useState(false);
     return (
         <div className={styles["wrapper"]}>
             <div className={styles["recommendation-banner"]}>
@@ -25,8 +19,8 @@ const SingleRecommendation = ({ recommendationBox }) => {
                         <span>{recommendationBox.date}</span>
                     </div>
                 </div>
-                <div className={styles["btn-like-recommendation"]} id="btn-like-recommendation">
-                    <FontAwesomeIcon icon={faHeart} className={styles["faHeart-recommendation"]} id="faHeart-recommendation"></FontAwesomeIcon>
+                <div className={styles["btn-like-recommendation"]} onClick={() => { setVisible() }}>
+                    <FontAwesomeIcon icon={faHeart} className={styles["faHeart-recommendation"]}></FontAwesomeIcon>
                 </div>
             </div>
             <div className={styles["recommendation-desc"]}>

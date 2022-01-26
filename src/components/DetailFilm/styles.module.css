@@ -253,6 +253,10 @@
   margin-bottom: 20px;
 }
 
+.detail-film-recommend-add {
+  max-height: none;
+}
+
 .detail-film-recommend-title {
   font-weight: 600;
   font-family: "Montserrat", sans-serif;
