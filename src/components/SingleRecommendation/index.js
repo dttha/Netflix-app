@@ -6,10 +6,10 @@ import { useEffect } from 'react/cjs/react.development';
 
 const SingleRecommendation = ({ recommendationBox }) => {
     useEffect(() => {
-        const btnLike = document.getElementById("btn-like")
-        const faHeart = document.getElementById("faHeart")
+        const btnLike = document.getElementById("btn-like-recommendation")
+        const faHeart = document.getElementById("faHeart-recommendation")
         btnLike.addEventListener("click", () => {
-            faHeart.classList.toggle(styles["activeHeart"])
+            faHeart.classList.toggle(styles["activeHeart-recommendation"])
         })
     }, [])
 
@@ -24,9 +24,9 @@ const SingleRecommendation = ({ recommendationBox }) => {
                     <div className={styles["recommendation-date"]}>
                         <span>{recommendationBox.date}</span>
                     </div>
-                    <div className={styles["btn-like"]} id="btn-like">
-                        <FontAwesomeIcon icon={faHeart} className={styles["faHeart"]} id="faHeart"></FontAwesomeIcon>
-                    </div>
+                </div>
+                <div className={styles["btn-like-recommendation"]} id="btn-like-recommendation">
+                    <FontAwesomeIcon icon={faHeart} className={styles["faHeart-recommendation"]} id="faHeart-recommendation"></FontAwesomeIcon>
                 </div>
             </div>
             <div className={styles["recommendation-desc"]}>

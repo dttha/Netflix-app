@@ -64,6 +64,8 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  padding: 5px;
+  margin-right: 20px;
 }
 
 .home-header-avata-group {
@@ -119,6 +121,18 @@
   border: 1px solid #fff;
   padding: 6px 8px;
   display: none;
+}
+
+.home-search-group {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid #fff;
+  padding: 6px 8px;
+  display: none;
+}
+
+.show {
+  display: block;
 }
 
 .mobile-btn-search {
@@ -218,6 +232,8 @@
 
   .home-mobile-search-group {
     display: flex;
+    padding: 5px;
+    margin-right: 20px;
   }
 
   .nav-icon {

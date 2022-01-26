@@ -11,9 +11,6 @@ import styles from './styles.module.css'
 const TvShow = () => {
     const [isActive, setActive] = useState(false);
     useEffect(() => {
-        // window.addEventListener("scroll", (e) => {
-        //     header.style.background = `rgba(0, 0, 0,${window.scrollY / 500})`
-        // })
         const genres = document.getElementById("genres")
         window.addEventListener("scroll", () => {
             if (window.scrollY > 0) {

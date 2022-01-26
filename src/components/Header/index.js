@@ -7,6 +7,8 @@ import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
 
 const Header = () => {
+    const [isActive, setActive] = useState(false);
+
     useEffect(() => {
         const header = document.getElementById("nav")
         window.addEventListener("scroll", (e) => {
@@ -60,8 +62,13 @@ const Header = () => {
                         </ul>
                     </div>
                     <div className={styles["home-header-content-right"]}>
-                        <div className={styles["home-header-search-icon"]}>
-                            <FontAwesomeIcon icon={faSearch} style={{ color: "#fff", padding: 5, marginRight: 20 }}></FontAwesomeIcon>
+                        <div className={styles["home-header-search-icon"]} onClick={() => setActive(!isActive)}>
+                            <FontAwesomeIcon icon={faSearch} style={{ color: "#fff" }}></FontAwesomeIcon>
+                        </div>
+                        <div className={!isActive ? styles["home-search-group"] : styles["home-search-group"] + " " + styles["show"]}>
+                            <FontAwesomeIcon icon={faSearch} style={{ color: "#fff" }}></FontAwesomeIcon>
+                            <input placeholder={"Movie, Tvshow, Actor"} type="text" style={{ color: "#fff", padding: "2px 8px", outline: "none", border: "none", backgroundColor: "rgba(0,0,0,0)" }}></input>
+                            <button className={styles["mobile-btn-search"]}>Search</button>
                         </div>
                         <div className={styles["home-header-avata-group"]}>
                             <div className={styles["home-header-avata"]}>
@@ -80,7 +87,7 @@ const Header = () => {
                         </div>
                     </div>
                     <div className={styles["home-mobile-search-group"]}>
-                        <FontAwesomeIcon icon={faSearch} style={{ color: "#fff", padding: 5 }}></FontAwesomeIcon>
+                        <FontAwesomeIcon icon={faSearch} style={{ color: "#fff" }}></FontAwesomeIcon>
                         <input placeholder={"Movie, Tvshow, Actor"} type="text" style={{ color: "#fff", padding: "2px 8px", outline: "none", border: "none", backgroundColor: "rgba(0,0,0,0)" }}></input>
                         <button className={styles["mobile-btn-search"]}>Search</button>
                     </div>
