@@ -1,10 +1,13 @@
 import styles from './styles.module.css';
 import React from 'react';
+import SingleFilm from '../SingleFilm';
 
-const Category = () => {
+const Category = ({ data }) => {
     return (
-        <div>
-
+        <div className={styles["category-wrap"]}>
+            {data && data.map((item) => {
+                return <SingleFilm singleFilm={item}></SingleFilm>
+            })}
         </div>
     );
 }

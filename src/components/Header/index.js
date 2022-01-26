@@ -62,7 +62,7 @@ const Header = () => {
                         </ul>
                     </div>
                     <div className={styles["home-header-content-right"]}>
-                        <div className={styles["home-header-search-icon"]} onClick={() => setActive(!isActive)}>
+                        <div className={isActive ? styles["home-header-search-icon"] + " " + styles["hidden"] : styles["home-header-search-icon"]} onClick={() => setActive(!isActive)}>
                             <FontAwesomeIcon icon={faSearch} style={{ color: "#fff" }}></FontAwesomeIcon>
                         </div>
                         <div className={!isActive ? styles["home-search-group"] : styles["home-search-group"] + " " + styles["show"]}>

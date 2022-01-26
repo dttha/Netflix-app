@@ -1,3 +1,10 @@
+.wrapper {
+  max-width: 1920px;
+  margin: auto;
+  overflow: hidden;
+  background-color: #000;
+}
+
 .genres {
   position: fixed;
   padding-top: 110px;
@@ -68,7 +75,7 @@
 
 .genres-add {
   z-index: 999999;
-  padding: 2% 0;
+  padding: 25px 0;
   background-color: #0f0f0f;
 }
 
@@ -79,4 +86,50 @@
   font-size: 14px;
   font-family: "Montserrat", sans-serif;
   margin: 5px;
+}
+
+.tvshow {
+  position: relative;
+  z-index: 100;
+  top: -120px;
+}
+
+.container {
+  padding-left: 60px;
+  padding-right: 60px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.category-title {
+  font-weight: 600;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 992px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .tvshow {
+    top: 0;
+  }
+
+  .genres-add {
+    z-index: 999999;
+    padding: 31px 0;
+    background-color: #0f0f0f;
+  }
+}
+
+@media (max-width: 550px) {
+  .wrap-genres {
+    margin-top: 15px;
+  }
 }

@@ -68,6 +68,10 @@
   margin-right: 20px;
 }
 
+.hidden {
+  display: none;
+}
+
 .home-header-avata-group {
   display: flex;
   align-items: center;
@@ -112,7 +116,7 @@
 }
 
 #btn-menu {
-  display: none;
+  display: none !important;
 }
 
 .home-mobile-search-group {
@@ -124,15 +128,16 @@
 }
 
 .home-search-group {
-  align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
   border: 1px solid #fff;
   padding: 6px 8px;
   display: none;
+  margin-right: 20px;
 }
 
 .show {
-  display: block;
+  display: flex;
+  align-items: center;
 }
 
 .mobile-btn-search {
@@ -237,7 +242,7 @@
   }
 
   .nav-icon {
-    display: block;
+    display: block !important;
   }
 
   .home-header-detail {

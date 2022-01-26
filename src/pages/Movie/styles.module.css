@@ -1,0 +1,135 @@
+.wrapper {
+  max-width: 1920px;
+  margin: auto;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.genres {
+  position: fixed;
+  padding-top: 110px;
+  width: 100%;
+  max-width: 1920px;
+  z-index: 15;
+  transition: all 0.2s;
+}
+
+.container {
+  padding-left: 70px;
+  padding-right: 60px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.wrap-genres {
+  display: flex;
+  align-items: center;
+}
+
+.type {
+  font-weight: 400;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.genres-select {
+  margin-left: 40px;
+  position: relative;
+  background-color: #0f0f0f;
+  padding: 2px 10px;
+  border: 1px solid #b3b3b3;
+  cursor: pointer;
+}
+
+.genres-span {
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  margin-right: 20px;
+}
+
+.genres-list {
+  opacity: 0;
+  visibility: hidden;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 50px;
+  top: 109%;
+  left: -1px;
+  padding: 20px;
+  position: absolute;
+  background-color: #0f0f0f;
+  z-index: 300;
+}
+
+.add {
+  opacity: 1;
+  visibility: visible;
+}
+
+.genres-add {
+  z-index: 999999;
+  padding: 25px 0;
+  background-color: #0f0f0f;
+}
+
+.genres-link {
+  padding: 10px auto;
+  color: #fff;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  margin: 5px;
+}
+
+.tvshow {
+  position: relative;
+  z-index: 100;
+  top: -120px;
+}
+
+.container {
+  padding-left: 60px;
+  padding-right: 60px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.category-title {
+  font-weight: 600;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 992px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .tvshow {
+    top: 0;
+  }
+
+  .genres-add {
+    z-index: 999999;
+    padding: 31px 0;
+    background-color: #0f0f0f;
+  }
+}
+
+@media (max-width: 550px) {
+  .wrap-genres {
+    margin-top: 15px;
+  }
+}
