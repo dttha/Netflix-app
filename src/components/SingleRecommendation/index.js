@@ -5,8 +5,10 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useRef, useState } from 'react/cjs/react.development';
 
 const SingleRecommendation = ({ recommendationBox }) => {
-    const btnId = useRef()
-    const [visible, setVisible] = useState(false);
+    const btnId = useRef(null)
+    const onToggleClick = (e) => {
+        btnId.current.classList.toggle(styles["activeHeart-recommendation"]);
+    };
     return (
         <div className={styles["wrapper"]}>
             <div className={styles["recommendation-banner"]}>
@@ -19,8 +21,8 @@ const SingleRecommendation = ({ recommendationBox }) => {
                         <span>{recommendationBox.date}</span>
                     </div>
                 </div>
-                <div className={styles["btn-like-recommendation"]} onClick={() => { setVisible() }}>
-                    <FontAwesomeIcon icon={faHeart} className={styles["faHeart-recommendation"]}></FontAwesomeIcon>
+                <div className={styles["faHeart-recommendation"]} ref={btnId}>
+                    <FontAwesomeIcon icon={faHeart} onClick={onToggleClick}></FontAwesomeIcon>
                 </div>
             </div>
             <div className={styles["recommendation-desc"]}>

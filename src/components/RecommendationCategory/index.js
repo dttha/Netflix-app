@@ -3,7 +3,6 @@ import SingleRecommendation from '../SingleRecommendation';
 import styles from './styles.module.css'
 
 const RecommendationCategory = ({ data }) => {
-    console.log(data, 'data');
     return (
         <div className={styles["detail-film-recommend-item"]}>
             {data && data.map((item) => {

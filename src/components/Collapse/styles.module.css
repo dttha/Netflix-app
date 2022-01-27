@@ -59,6 +59,10 @@
   overflow: hidden;
 }
 
+.question-content-show-add {
+  max-height: none;
+}
+
 .question-email-title {
   color: #fff;
   font-size: 16px;

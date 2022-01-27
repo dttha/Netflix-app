@@ -53,15 +53,22 @@
 
 .favorite-content-movie {
   padding-top: 30px;
+  display: block;
 }
 
 .favorite-content-tv {
   padding-top: 30px;
-  display: none;
+  display: block !important;
 }
 
-.favorite-content-tv-add {
+.favorite-content-movie-hidden {
   padding-top: 30px;
+  display: none !important;
+}
+
+.favorite-content-tv-hidden {
+  padding-top: 30px;
+  display: none;
 }
 
 @media (max-width: 992px) {

@@ -83,9 +83,7 @@ const TvShow = () => {
                         <div className={styles["genres-select"]} id="genres-select" onClick={() => setActive(!isActive)} onBlur={() => setActive(false)} tabIndex={0}>
                             <span className={styles["genres-span"]}>Genres</span>
                             <FontAwesomeIcon icon={faCaretDown} style={{ color: "white" }}></FontAwesomeIcon>
-                            <ul className={!isActive ? styles["genres-list"] : styles["genres-list"] + " " + styles["add"]} onClick={(e) => {
-                                e.stopPropagation()
-                            }}>
+                            <ul className={!isActive ? styles["genres-list"] : styles["genres-list"] + " " + styles["add"]}>
                                 <Link className={styles["genres-link"]} to="/tvshow/:id">Action Adventure</Link>
                                 <Link className={styles["genres-link"]} to="/tvshow/:id">Animation</Link>
                                 <Link className={styles["genres-link"]} to="/tvshow/:id">Comedy</Link>

@@ -2,11 +2,39 @@ import styles from './styles.module.css'
 import React from 'react';
 import Header from '../../components/Header';
 import { NavLink, Outlet } from 'react-router-dom';
-import { useState } from 'react/cjs/react.development';
+import { useEffect, useRef, useState } from 'react/cjs/react.development';
 import Category from '../../components/Category';
 import Footer from '../../components/Footer';
 
 const Favorite = () => {
+    useEffect(() => {
+        const tabTv = document.getElementById("tabTv");
+        const tabMovie = document.getElementById("tabMovie");
+
+        tabTv.addEventListener("click", () => {
+            tabMovie.classList.remove(styles["favorite-type-link-active"])
+            tabTv.classList.add(styles["favorite-type-link-active"])
+        })
+
+        tabMovie.addEventListener("click", () => {
+            tabTv.classList.remove(styles["favorite-type-link-active"])
+            tabMovie.classList.add(styles["favorite-type-link-active"])
+        })
+    }, [])
+
+    const tabTvRef = useRef(null)
+    const tabMovieRef = useRef(null)
+
+    const onClickTv = (e) => {
+        tabMovieRef.current.classList.add(styles["favorite-content-movie-hidden"]);
+        tabTvRef.current.classList.add(styles["favorite-content-tv"]);
+    };
+
+    const onClickMovie = (e) => {
+        tabMovieRef.current.classList.remove(styles["favorite-content-movie-hidden"]);
+        tabTvRef.current.classList.remove(styles["favorite-content-tv"]);
+    };
+
 
     const data1 = [
         {
@@ -61,51 +89,51 @@ const Favorite = () => {
 
     const data2 = [
         {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
+            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
             title: "title"
         },
         {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
+            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
             title: "title1"
         },
         {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
+            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
             title: "title2"
         },
         {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
+            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
             title: "title3"
         },
         {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
+            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
             title: "title4"
         },
         {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
+            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
             title: "title5"
         },
         {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
+            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
             title: "title6"
         },
         {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
+            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
             title: "title2"
         },
         {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
+            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
             title: "title3"
         },
         {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
+            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
             title: "title4"
         },
         {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
+            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
             title: "title5"
         },
         {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
+            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
             title: "title6"
         }
     ]
@@ -116,13 +144,13 @@ const Favorite = () => {
             <div className={styles["favorite"]}>
                 <div className={styles["container"]}>
                     <div className={styles["favorite-type"]}>
-                        <NavLink id="1" to="/favorite" className={({ isActive }) => isActive ? `${styles['favorite-type-link-active']} ${styles["favorite-type-link"]}` : styles["favorite-type-link"]}>Movie</NavLink>
-                        <NavLink id="2" to="/" className={({ isActive }) => isActive ? `${styles['favorite-type-link-active']} ${styles["favorite-type-link"]}` : styles["favorite-type-link"]}>Tvshow</NavLink>
+                        <span id="tabMovie" className={styles['favorite-type-link'] + " " + styles["favorite-type-link-active"]} onClick={onClickMovie}>Movie</span>
+                        <span id="tabTv" className={styles['favorite-type-link']} onClick={onClickTv}>Tvshow</span>
                     </div>
-                    <div className={styles['favorite-content-movie']}>
+                    <div className={styles['favorite-content-movie']} ref={tabMovieRef}>
                         <Category data={data1}></Category>
                     </div>
-                    <div className={styles['favorite-content-tv']}>
+                    <div className={styles['favorite-content-tv-hidden']} ref={tabTvRef}>
                         <Category data={data2}></Category>
                     </div>
                 </div>
