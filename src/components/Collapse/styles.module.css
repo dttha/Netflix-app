@@ -49,6 +49,7 @@
   font-family: "Montserrat", sans-serif;
   padding: 15px 20px;
   display: inline-block;
+  transition: 0.25s ease-out;
 }
 
 .question-content-show {
@@ -57,10 +58,12 @@
   max-height: 0;
   background-color: #303030;
   overflow: hidden;
+  transition: 0.25s ease-out;
 }
 
 .question-content-show-add {
   max-height: none;
+  transition: 0.25s ease-out;
 }
 
 .question-email-title {
@@ -74,4 +77,26 @@
 .question-email {
   margin-bottom: 45px;
   text-align: center;
+}
+
+@media (max-width: 1150px) {
+  .question-content-dropdown {
+    width: 85%;
+  }
+
+  .question-main h6 {
+    font-weight: 400;
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    color: #fff;
+  }
+}
+
+@media (max-width: 800px) {
+  .question-main h6 {
+    font-weight: 400;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    color: #fff;
+  }
 }

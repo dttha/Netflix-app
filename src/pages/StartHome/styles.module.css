@@ -316,3 +316,20 @@ video {
     width: 100%;
   }
 }
+
+@media (max-width: 1000px) {
+  .feature-content-wrap {
+    flex-direction: column-reverse;
+  }
+
+  .feature-content-text {
+    width: 80%;
+    padding: initial;
+    padding-top: 20px;
+    text-align: center;
+  }
+
+  .feature-content-media {
+    width: 90%;
+  }
+}
