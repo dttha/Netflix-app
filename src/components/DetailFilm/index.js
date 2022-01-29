@@ -5,7 +5,8 @@ import { faCaretRight, faChevronDown, faChevronUp, faHeart, faStar, faTimes, faW
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import RecommendationCategory from '../RecommendationCategory';
-import { useState } from 'react/cjs/react.development';
+import { useRef, useState } from 'react/cjs/react.development';
+import TrailerModal from '../TrailerModal';
 
 const DetailFilm = () => {
     const navigate = useNavigate()
@@ -17,16 +18,23 @@ const DetailFilm = () => {
         btnLike.addEventListener("click", () => {
             faHeart.classList.toggle(styles["activeHeart"])
         })
-        const down = document.getElementById("faChevronDown")
-        const up = document.getElementById("faChevronUp")
-        let recommend = document.getElementById("detail-film-recommend")
-        down.addEventListener("click", () => {
-            recommend.classList.add(styles["detail-film-recommend-add"])
-        })
-        // up.addEventListener("click", () => {
-        // recommend.classList.remove(styles["detail-film-recommend-add"])
-        // })
     }, [])
+    const upRef = useRef(null)
+
+    const handleClickUp = (e) => {
+        upRef.current.classList.remove(styles["detail-film-recommend-add"]);
+        setVisible(false);
+    };
+
+    const handleClickDown = (e) => {
+        upRef.current.classList.add(styles["detail-film-recommend-add"]);
+        setVisible(true);
+    };
+
+    const btnId = useRef(null)
+    const onToggleClick = (e) => {
+        btnId.current.classList.add(styles["modal-trailer-add"]);
+    };
 
     const data = [
         {
@@ -175,32 +183,28 @@ const DetailFilm = () => {
                 <div className={styles["detail-film-background-img"]}>
                     <div className={styles["detail-film-title"]}>
                         <h4 className={styles["detail-film-name"]}>Eternals</h4>
-                        <div className={styles["detail-film-btn"]}>
-                            <div className={styles["btn-trailer"]}>
+                        <div className={styles["detail-film-btn"]} >
+                            <div className={styles["btn-trailer"]} onClick={onToggleClick}>
                                 <FontAwesomeIcon icon={faCaretRight} style={{ marginRight: 10, fontSize: 20 }}></FontAwesomeIcon>
                                 <span>Trailer</span>
+                                <div className={styles["modal-trailer"]} ref={btnId} onClick={() => {
+                                    navigate(0)
+                                }}>
+                                    <TrailerModal />
+                                </div >
                             </div>
                             <div className={styles["detail-film-btn-feel"]}>
                                 <div className={styles["btn-like"]} id="btn-like">
                                     <FontAwesomeIcon icon={faHeart} className={styles["faHeart"]} id="faHeart"></FontAwesomeIcon>
                                 </div>
-                                <div className={styles["btn-rate"]} onClick={() => setActive(true)}>
+                                <div className={styles["btn-rate"]} onClick={() => setActive(true)} onBlur={() => setActive(false)} tabIndex={0}>
                                     <FontAwesomeIcon icon={faStar} className={styles["faStar"]}></FontAwesomeIcon>
                                     <div className={!isActive ? styles["rating"] : styles["rating"] + " " + styles["activeStar"]} onClick={(e) => {
                                         e.stopPropagation()
                                     }}>
                                         <FontAwesomeIcon icon={faWindowClose} className={styles["faWindowClose"]}></FontAwesomeIcon>
                                         <div className={styles["rating-group"]}>
-                                            <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]} ></FontAwesomeIcon>
-                                            <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]}></FontAwesomeIcon>
-                                            <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]}></FontAwesomeIcon>
-                                            <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]}></FontAwesomeIcon>
-                                            <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]}></FontAwesomeIcon>
-                                            <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]}></FontAwesomeIcon>
-                                            <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]}></FontAwesomeIcon>
-                                            <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]}></FontAwesomeIcon>
-                                            <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]}></FontAwesomeIcon>
-                                            <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]}></FontAwesomeIcon>
+                                            {Array(10).fill({}).map((item, index) => <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]} onClick={() => { }}></FontAwesomeIcon>)}
                                         </div>
                                     </div>
                                 </div>
@@ -250,14 +254,14 @@ const DetailFilm = () => {
                 </div>
                 {/* Category */}
                 <div className={styles["wrap-detail-film-info"]}>
-                    <div className={styles["detail-film-recommend"]} id="detail-film-recommend">
+                    <div className={styles["detail-film-recommend"]} ref={upRef}>
                         <span className={styles["detail-film-recommend-title"]}>Recommendation</span>
                         <RecommendationCategory data={data}></RecommendationCategory>
                     </div>
                     <div className={styles["detail-film-recommend-more-btn"]}>
                         <div className={styles["detail-film-recommend-more-wrap-icon"]}>
-                            {!visible && <FontAwesomeIcon icon={faChevronDown} id="faChevronDown" className={styles["faChevronDown"]} onClick={() => setVisible(true)}></FontAwesomeIcon>}
-                            {visible && <FontAwesomeIcon icon={faChevronUp} id="faChevronUp" className={styles["faChevronUp"]} onClick={() => setVisible(false)}></FontAwesomeIcon>}
+                            {!visible && <FontAwesomeIcon icon={faChevronDown} className={styles["faChevronDown"]} onClick={handleClickDown}></FontAwesomeIcon>}
+                            {visible && <FontAwesomeIcon icon={faChevronUp} className={styles["faChevronUp"]} onClick={handleClickUp}></FontAwesomeIcon>}
                         </div>
                     </div>
                 </div>

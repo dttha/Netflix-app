@@ -1,7 +1,7 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { useState } from 'react/cjs/react.development';
 import Banner from '../../components/Banner';
 import Category from '../../components/Category';
@@ -119,6 +119,7 @@ const Movie = () => {
                 </div>
             </div>
             <Footer />
+            <Outlet />
         </div>
     );
 }

@@ -1,0 +1,15 @@
+.jframe {
+  width: 70vw;
+  height: 90vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 500px) {
+  .jframe {
+    width: 85vw;
+    height: 55vh;
+  }
+}

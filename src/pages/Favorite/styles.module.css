@@ -75,5 +75,12 @@
   .container {
     padding-left: 20px;
     padding-right: 20px;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 530px) {
+  .favorite {
+    padding-top: 110px;
   }
 }

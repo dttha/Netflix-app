@@ -49,21 +49,19 @@
   font-family: "Montserrat", sans-serif;
   padding: 15px 20px;
   display: inline-block;
-  transition: 0.25s ease-out;
 }
 
 .question-content-show {
   margin-top: 2px;
   text-align: left;
-  max-height: 0;
+  height: 0;
   background-color: #303030;
   overflow: hidden;
-  transition: 0.25s ease-out;
+  transition: 0.5s;
 }
 
 .question-content-show-add {
-  max-height: none;
-  transition: 0.25s ease-out;
+  height: auto;
 }
 
 .question-email-title {

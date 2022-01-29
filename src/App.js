@@ -27,7 +27,7 @@ function App() {
           <Route path="movie/:id" element={<DetailFilm />}></Route>
         </Route>
         <Route path="tvshow" element={<TvShow />}>
-          <Route path="tv/:id" element={<DetailFilm />}></Route>
+          <Route path="movie/:id" element={<DetailFilm />}></Route>
         </Route>
         <Route path="movie" element={<Movie />}>
           <Route path="movie/:id" element={<DetailFilm />}></Route>
