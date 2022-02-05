@@ -1,76 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { HOME_GET_FILM_MOVIE, HOME_GET_FILM_TV } from '../../constants';
 import SwiperHome from '../SwiperHome';
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 
 const ContentHome = () => {
-    const data = [
-        {
-            id: 1,
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title"
-        },
-        {
-            id: 2,
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title1"
-        },
-        {
-            id: 3,
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title2"
-        },
-        {
-            id: 1,
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title3"
-        },
-        {
-            id: 1,
+    const listMovie = useSelector((state) => state.film.listMovie)
+    const listTv = useSelector((state) => state.film.listTv)
+    const dispatch = useDispatch()
 
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title4"
-        },
-        {
-            id: 1,
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title5"
-        },
-        {
-            id: 1,
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title6"
-        },
-        {
-            id: 1,
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title2"
-        },
-        {
-            id: 1,
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title3"
-        },
-        {
-            id: 1,
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title4"
-        },
-        {
-            id: 1,
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title5"
-        },
-        {
-            id: 1,
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title6"
-        }
-    ]
+    useEffect(() => {
+        dispatch({ type: HOME_GET_FILM_MOVIE })
+        dispatch({ type: HOME_GET_FILM_TV })
+    }, [])
+
+    console.log(listMovie, 'film');
     return (
         <div className={styles["wrapper"]}>
-            <SwiperHome data={data}></SwiperHome>
-            <SwiperHome data={data}></SwiperHome>
-            <SwiperHome data={data}></SwiperHome>
+            <SwiperHome title="Popular Movies" data={listMovie}></SwiperHome>
+            <SwiperHome title="Popular TvShows" data={listTv}></SwiperHome>
+            <SwiperHome title="Animation movies" data={listMovie}></SwiperHome>
         </div>
     )
 }
