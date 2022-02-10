@@ -15,6 +15,12 @@ const StartHome = () => {
         console.log(value);
     }, [value])
 
+    const data = [
+        {
+            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
+            title: "title"
+        },
+    ]
     return (
         <div className={styles["wrapper"]}>
             <div className={styles["banner"]}>

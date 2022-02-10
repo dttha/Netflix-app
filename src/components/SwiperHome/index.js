@@ -24,18 +24,22 @@ const SwiperHome = ({ data, title }) => {
                             breakpoints={{
                                 0: {
                                     slidesPerView: 1,
+                                    slidesPerGroup: 1,
                                     spaceBetween: 8
                                 },
                                 400: {
                                     slidesPerView: 2,
+                                    slidesPerGroup: 2,
                                     spaceBetween: 8
                                 },
                                 800: {
                                     slidesPerView: 4,
+                                    slidesPerGroup: 4,
                                     spaceBetween: 8
                                 },
                                 992: {
                                     slidesPerView: 5,
+                                    slidesPerGroup: 5,
                                     spaceBetween: 8
                                 }
                             }

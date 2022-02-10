@@ -7,7 +7,6 @@ import TrailerModal from '../TrailerModal';
 import { useEffect, useState } from 'react/cjs/react.development';
 
 const Banner = () => {
-    const [isActive, setActive] = useState(false);
     const navigate = useNavigate()
 
     useEffect(() => {
