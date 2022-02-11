@@ -1,16 +1,20 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
 import { useState } from 'react/cjs/react.development';
 import Banner from '../../components/Banner';
 import Category from '../../components/Category';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import { HOME_GET_GENRES_TV } from '../../constants';
 import styles from './styles.module.css'
 
 const TvShow = () => {
     const [isActive, setActive] = useState(false);
+    const genresTv = useSelector((state) => state.film.genresTv)
+    const dispatch = useDispatch()
     useEffect(() => {
         const genres = document.getElementById("genres")
         window.addEventListener("scroll", () => {
@@ -20,6 +24,10 @@ const TvShow = () => {
                 genres.classList.remove(styles["genres-add"])
             }
         })
+    }, [])
+
+    useEffect(() => {
+        dispatch({ type: HOME_GET_GENRES_TV })
     }, [])
 
     const data = [
@@ -83,23 +91,15 @@ const TvShow = () => {
                         <div className={styles["genres-select"]} id="genres-select" onClick={() => setActive(!isActive)} onBlur={() => setActive(false)} tabIndex={0}>
                             <span className={styles["genres-span"]}>Genres</span>
                             <FontAwesomeIcon icon={faCaretDown} style={{ color: "white" }}></FontAwesomeIcon>
-                            <ul className={!isActive ? styles["genres-list"] : styles["genres-list"] + " " + styles["add"]}>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Action Adventure</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Animation</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Comedy</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Crime</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Documentary</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Drama</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Family</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Kids</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Mystery</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">News</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Reality</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Sci-Fi Fantasy</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Soap</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Talk</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">War Politics</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Western</Link>
+                            <ul className={!isActive ? styles["genres-list"] : styles["genres-list"] + " " + styles["add"]} onClick={(e) => {
+                                e.stopPropagation()
+                            }}>
+                                {genresTv.map((item) => {
+                                    return (
+                                        <Link className={styles["genres-link"]} to="/tvshow/:id">{item.name}</Link>
+                                    )
+                                }
+                                )}
                             </ul>
                         </div>
                     </div>
@@ -116,7 +116,7 @@ const TvShow = () => {
             </div>
             <Footer />
             <Outlet />
-        </div>
+        </div >
     );
 }
 

@@ -14,9 +14,17 @@ export const getGenresMovie = () => {
 }
 
 export const getGenresTv = () => {
-    return axios.get(URLs.baseUrl + '/genre/tv/list?api_key' + apiKey)
+    return axios.get(URLs.baseUrl + '/genre/tv/list?api_key=' + apiKey)
+}
+
+export const getTvByGenres = (genres) => {
+    return axios.get('/discover/tv', { params: { api_key: apiKey, with_genres: genres }, baseURL: URLs.baseUrl })
 }
 
 export const getFimlByGenresMovie = (genres) => {
     return axios.get('/discover/movie', { params: { api_key: apiKey, with_genres: genres }, baseURL: URLs.baseUrl })
+}
+
+export const getDetailsFilm = () => {
+
 }

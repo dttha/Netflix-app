@@ -1,6 +1,6 @@
 import { call, delay, put, takeEvery, select, all } from 'redux-saga/effects';
 import { getFimlByGenresMovie, getGenresMovie, getGenresTv, getTrendingMovieDay, getTrendingTvDay } from '../apis/film';
-import { HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_MOVIE, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE, HOME_GET_GENRES_MOVIE_SUCCESS } from '../constants';
+import { HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_MOVIE, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE, HOME_GET_GENRES_MOVIE_SUCCESS, HOME_GET_GENRES_TV, HOME_GET_GENRES_TV_SUCCESS } from '../constants';
 //hung
 
 function* getFilmMovieSaga({ payload }) {
@@ -20,6 +20,12 @@ function* getGenresMovieSaga() {
     const res = yield call(getGenresMovie)
     console.log("🚀 ~ file: index.js ~ line 21 ~ function*getGenreMovie ~ res", res)
     yield put({ type: HOME_GET_GENRES_MOVIE_SUCCESS, payload: res.data.genres })
+}
+
+function* getGenresTvSaga() {
+    const res = yield call(getGenresTv)
+    console.log("🚀 ~ file: index.js ~ line 27 ~ function*getGenresTvSaga ~ res", res)
+    yield put({ type: HOME_GET_GENRES_TV_SUCCESS, payload: res.data.genres })
 }
 
 function* getFilmByGenresSaga() {
@@ -42,6 +48,7 @@ function* mySaga() {
     yield takeEvery(HOME_GET_FILM_MOVIE, getFilmMovieSaga) //4 lan
     yield takeEvery(HOME_GET_FILM_TV, getFilmTvSaga);
     yield takeEvery(HOME_GET_GENRES_MOVIE, getGenresMovieSaga)
+    yield takeEvery(HOME_GET_GENRES_TV, getGenresTvSaga)
     yield takeEvery(HOME_GET_FILM_BY_GENRE_MOVIE, getFilmByGenresSaga)
     // yield takeLatest(HOME_GET_FILM_TV, getFilmTvSaga) //1 lan
 }

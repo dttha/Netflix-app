@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_MOVIE, HOME_GET_FILM_TV, HOME_GET_GENRES_MOVIE } from '../../constants';
+import { HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_MOVIE, HOME_GET_FILM_TV, HOME_GET_GENRES_MOVIE, HOME_GET_GENRES_TV } from '../../constants';
 import SwiperHome from '../SwiperHome';
 import styles from './styles.module.css';
 

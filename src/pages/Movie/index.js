@@ -1,16 +1,24 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
 import { useState } from 'react/cjs/react.development';
 import Banner from '../../components/Banner';
 import Category from '../../components/Category';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import { HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_GENRES_MOVIE } from '../../constants';
 import styles from './styles.module.css'
 
 const Movie = () => {
     const [isActive, setActive] = useState(false);
+    const genresMovie = useSelector((state) => state.film.genresMovie)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch({ type: HOME_GET_GENRES_MOVIE })
+    }, [])
     useEffect(() => {
         const genres = document.getElementById("genres")
         window.addEventListener("scroll", () => {
@@ -85,25 +93,12 @@ const Movie = () => {
                             <ul className={!isActive ? styles["genres-list"] : styles["genres-list"] + " " + styles["add"]} onClick={(e) => {
                                 e.stopPropagation()
                             }}>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Action</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Adventure</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Animation</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Comedy</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Crime</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Documentary</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Drama</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Family</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Fantasy</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">History</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Horror</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Music</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Mystery</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Romance</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Science Fiction</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">TV Movie</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Thriller</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">War</Link>
-                                <Link className={styles["genres-link"]} to="/tvshow/:id">Western</Link>
+                                {genresMovie.map((item) => {
+                                    return (
+                                        <Link className={styles["genres-link"]} to="/tvshow/:id">{item.name}</Link>
+                                    )
+                                }
+                                )}
                             </ul>
                         </div>
                     </div>

@@ -29,6 +29,12 @@ function Input({ value, onChange, styleContainer, styleInput, styleLabel, label,
         if (valueInput !== '') {
             labelRef.current.classList.add(styles['wrap-input-placeholder-top'])
         }
+        return () => {
+            // thực thi ngay trước khi dependency thay đổi
+            if (valueInput === '') {
+                labelRef.current.classList.add(styles['wrap-input-placeholder-top'])
+            }
+        }
     }, [])
 
     return <div className={styles["wrap-email-text"]} style={styleContainer ?? {}}>

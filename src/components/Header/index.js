@@ -45,10 +45,10 @@ const Header = () => {
                                 </Link>
                             </div>
                             <ul className={styles["home-header-menu-mobile"]}>
-                                <a href="#home" className={styles["home-header-menu-link"] + " " + styles["home-header-menu-link-active"]}>Home</a>
-                                <a href="#tvshow" className={styles["home-header-menu-link"]}>Tv shows</a>
-                                <a href="#movie" className={styles["home-header-menu-link"]}>Movies</a>
-                                <a href="#favorite" className={styles["home-header-menu-link"]}>Favorite</a>
+                                <NavLink to="/home" className={({ isActive }) => isActive ? `${styles['home-header-menu-link-active']} ${styles["home-header-menu-link"]}` : styles["home-header-menu-link"]}>Home</NavLink>
+                                <NavLink to="/tvshow" className={({ isActive }) => isActive ? `${styles['home-header-menu-link-active']} ${styles["home-header-menu-link"]}` : styles["home-header-menu-link"]}>Tv shows</NavLink>
+                                <NavLink to="/movie" className={({ isActive }) => isActive ? `${styles['home-header-menu-link-active']} ${styles["home-header-menu-link"]}` : styles["home-header-menu-link"]}>Movies</NavLink>
+                                <NavLink to="/favorite" className={({ isActive }) => isActive ? `${styles['home-header-menu-link-active']} ${styles["home-header-menu-link"]}` : styles["home-header-menu-link"]}>Favorite</NavLink>
                             </ul>
                         </div>
                         <div className={styles["home-header-content-logo"]}>
