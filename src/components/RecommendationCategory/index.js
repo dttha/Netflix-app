@@ -5,8 +5,8 @@ import styles from './styles.module.css'
 const RecommendationCategory = ({ data }) => {
     return (
         <div className={styles["detail-film-recommend-item"]}>
-            {data && data.map((item) => {
-                return <SingleRecommendation recommendationBox={item}></SingleRecommendation>
+            {data && data.map((item, index) => {
+                return <SingleRecommendation key={"recommend" + index} recommendationBox={item}></SingleRecommendation>
             })}
         </div>
     );

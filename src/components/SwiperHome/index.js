@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
 const SwiperHome = ({ data, title }) => {
-    console.log(data);
     return (
         <div className={styles["home-wrap-category"]}>
             <div className={styles["home-category"]}>
@@ -45,8 +44,8 @@ const SwiperHome = ({ data, title }) => {
                             }
                             }
                         >
-                            {data && data.map((item) => {
-                                return <SwiperSlide>
+                            {data && data.map((item, index) => {
+                                return <SwiperSlide key={"singleFilm" + index}>
                                     <SingleFilm singleFilm={item}></SingleFilm>
                                 </SwiperSlide>
                             })}

@@ -1,4 +1,4 @@
-import { HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_MOVIE_FAIL, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE_SUCCESS, HOME_GET_GENRES_TV_SUCCESS } from "../constants"
+import { HOME_GET_ACTOR_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_MOVIE_FAIL, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE_SUCCESS, HOME_GET_GENRES_TV_SUCCESS, HOME_GET_MOVIE_DETAIL_SUCCESS } from "../constants"
 
 const initialState = {
     listMovie: [],
@@ -8,7 +8,9 @@ const initialState = {
     movieFavorites: [],
     tvFavorites: [],
     search: [],
-    listFilmByGenres: []
+    listFilmByGenres: [],
+    detailMovie: {},
+    actor: {}
 }
 
 const filmReducer = (state = initialState, action) => {
@@ -51,6 +53,18 @@ const filmReducer = (state = initialState, action) => {
             return {
                 ...state,
                 listFilmByGenres: action.payload
+            }
+        }
+        case HOME_GET_MOVIE_DETAIL_SUCCESS: {
+            return {
+                ...state,
+                detailMovie: action.payload
+            }
+        }
+        case HOME_GET_ACTOR_SUCCESS: {
+            return {
+                ...state,
+                actor: action.payload
             }
         }
         default:

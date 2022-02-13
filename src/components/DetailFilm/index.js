@@ -2,22 +2,34 @@ import React from 'react';
 import styles from './styles.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight, faChevronDown, faChevronUp, faHeart, faStar, faTimes, faWindowClose } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import RecommendationCategory from '../RecommendationCategory';
 import { useRef, useState } from 'react/cjs/react.development';
 import TrailerModal from '../TrailerModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { HOME_GET_ACTOR, HOME_GET_MOVIE_DETAIL } from '../../constants';
+import { URLs } from '../../constants/urls';
 
 const DetailFilm = () => {
     const navigate = useNavigate()
     const [visible, setVisible] = useState(false);
     const [isActive, setActive] = useState(false);
+    const { id } = useParams();
+    const detailMovie = useSelector((state) => state.film.detailMovie)
+    const actor = useSelector((state) => state.film.actor)
+    console.log("🚀 ~ file: index.js ~ line 21 ~ DetailFilm ~ actor", actor)
+    const dispatch = useDispatch()
     useEffect(() => {
         const btnLike = document.getElementById("btn-like")
         const faHeart = document.getElementById("faHeart")
         btnLike.addEventListener("click", () => {
             faHeart.classList.toggle(styles["activeHeart"])
         })
+    }, [])
+    useEffect(() => {
+        dispatch({ type: HOME_GET_MOVIE_DETAIL, payload: id })
+        dispatch({ type: HOME_GET_ACTOR, payload: id })
     }, [])
     const upRef = useRef(null)
 
@@ -180,9 +192,13 @@ const DetailFilm = () => {
                 e.stopPropagation()
             }}>
                 {/* Banner */}
-                <div className={styles["detail-film-background-img"]}>
+                <div className={styles["detail-film-background-img"]} style={{
+                    backgroundImage: detailMovie.backdrop_path ? `linear-gradient(0deg,rgb(0, 0, 0) 0px,
+                        rgba(0, 0, 0, 0) 100%), url("${URLs.baseImage}/${detailMovie?.backdrop_path}")` : 'unset'
+                }}
+                >
                     <div className={styles["detail-film-title"]}>
-                        <h4 className={styles["detail-film-name"]}>Eternals</h4>
+                        <h4 className={styles["detail-film-name"]}>{detailMovie?.original_title}</h4>
                         <div className={styles["detail-film-btn"]} >
                             <div className={styles["btn-trailer"]} onClick={onToggleClick}>
                                 <FontAwesomeIcon icon={faCaretRight} style={{ marginRight: 10, fontSize: 20 }}></FontAwesomeIcon>
@@ -204,7 +220,7 @@ const DetailFilm = () => {
                                     }}>
                                         <FontAwesomeIcon icon={faWindowClose} className={styles["faWindowClose"]}></FontAwesomeIcon>
                                         <div className={styles["rating-group"]}>
-                                            {Array(10).fill({}).map((item, index) => <FontAwesomeIcon icon={faStar} className={styles["faStar-group"]} onClick={() => { }}></FontAwesomeIcon>)}
+                                            {Array(10).fill({}).map((item, index) => <FontAwesomeIcon key={index} icon={faStar} className={styles["faStar-group"]} onClick={() => { }}></FontAwesomeIcon>)}
                                         </div>
                                     </div>
                                 </div>
@@ -222,32 +238,37 @@ const DetailFilm = () => {
                     <div className={styles["detail-film-info"]}>
                         <div className={styles["detail-film-info-left"]}>
                             <div className={styles["detail-film-info-date"]}>
-                                <span className={styles["detail-film-info-date-release"]}>2021-12-15</span>
-                                <span className={styles["detail-film-info-date-time"]}>2h 28p</span>
+                                <span className={styles["detail-film-info-date-release"]}>{detailMovie.release_date}</span>
+                                <span className={styles["detail-film-info-date-time"]}>{`${Math.floor(detailMovie?.runtime / 60)}h
+                                              ${detailMovie.runtime % 60}p`}</span>
                             </div>
                             <span className={styles["detail-film-info-rating"]}>
-                                Rating: 8.5
+                                Rating: {detailMovie?.vote_average}
                             </span>
                             <p className={styles["detail-film-info-desc"]}>
-                                Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of
-                                being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous,
-                                forcing him to discover what it truly means to be Spider-Man.
+                                {detailMovie.overview}
                             </p>
                         </div>
                         <div className={styles["detail-film-info-right"]}>
                             <div className={styles["detail-film-info-actors"]}>
-                                <span className={styles["detail-film-info-title"]}>Actors:</span>
-                                <span className={styles["detail-film-info-name"]}> Tom Holland,</span>
-                                <span className={styles["detail-film-info-name"]}> Zendaya,</span>
-                                <span className={styles["detail-film-info-name"]}> Benedict Cumberbatch,</span>
-                                <span className={styles["detail-film-info-name"]}> Jacob Batalon,</span>
-                                <span style={{ color: "#fff" }}> ...</span>
+                                <span className={styles["detail-film-info-title"]}>Actors:
+                                    {actor.cast && actor.cast.filter((item, index) => index < 4).map((item, index) => {
+                                        return <span key={"actor" + index} className={styles["detail-film-info-name"]}>{item.name},{' '}</span>
+                                    })
+                                    }
+                                </span>
+                                {actor.cast?.length > 4 && <span style={{ color: 'white' }}>...</span>}
                             </div>
                             <div className={styles["detail-film-info-genres"]}>
-                                <span className={styles["detail-film-info-title"]}>Genres:</span>
-                                <span className={styles["detail-film-info-name"]}> Action,</span>
-                                <span className={styles["detail-film-info-name"]}> Aventure,</span>
-                                <span className={styles["detail-film-info-name"]}> Science Fiction.</span>
+                                <span className={styles["detail-film-info-title"]}>Genres:
+                                    {detailMovie.genres?.map((item, index) => {
+                                        if (index !== (detailMovie.genres && detailMovie.genres?.length - 1))
+                                            return <Link to={`/movie/${item.id}`} key={"genres" + index} className={styles["detail-film-info-name"]}> {item.name},{' '}</Link>
+                                        else
+                                            return <Link to={`/movie/${item.id}`} key={"genres" + index} className={styles["detail-film-info-name"]}>{item.name}.</Link>
+                                    })
+                                    }
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -268,7 +289,7 @@ const DetailFilm = () => {
                 {/* Footer */}
                 <div className={styles["wrap-detail-film-info"]}>
                     <div className={styles["wrap-detail-film-final"]}>
-                        <h6 className={styles["wrap-detail-film-final-more-info"]}>More info about Eternals</h6>
+                        <h6 className={styles["wrap-detail-film-final-more-info"]}>More info about {detailMovie.original_title}</h6>
                         <p className={styles["detail-film-info-title"]} style={{ marginTop: 10 }}>
                             Director:<span className={styles["detail-film-info-name"]}> Chloé Zhao.</span>
                         </p>
@@ -277,14 +298,22 @@ const DetailFilm = () => {
                             <span className={styles["detail-film-info-name"]}> Gemma Chan, Richard Madden, Angelina Jolie, Kumail Nanjiani, Barry Keoghan, Lauren Ridloff, Lia McHugh, Brian Tyree Henry, Ma Dong-seok, Salma Hayek, Kit Harington, Harish Patel, David Kaye, Bill Skarsgård, Haaz Sleiman, Esai Daniel Cross, Alan Scott, Hannah Dodd, Adria Escudero, Sebastián Viveros, Nikkita Chadha, Grahame Fox, Zain Al Rafeea, Alberto Rodríguez, Lucia Efstathiou, Derek Horsham, Jeff Mirza, Ascension Martinez Rubio, Ozer Ercan, Ariadna Vadillo Soto, Orson Rosenberg, Harry Styles, Patton Oswalt, Brenda Lorena Garcia, Sebastian Senior, Chloe Stannage, Mahershala Ali.</span>
                         </p>
                         <p className={styles["detail-film-info-title"]} style={{ marginTop: 10 }}>
-                            Genre:
-                            <span className={styles["detail-film-info-name"]}> Action, Adventure, Fantasy, Science Fiction.</span>
+                            Genres:
+                            <span className={styles["detail-film-info-name"]}>
+                                {detailMovie.genres?.map((item, index) => {
+                                    if (index !== (detailMovie.genres && detailMovie.genres?.length - 1))
+                                        return <Link to={`/movie/${item.id}`} key={index} className={styles["detail-film-info-name"]}> {item.name},{' '}</Link>
+                                    else
+                                        return <Link to={`/movie/${item.id}`} key={index} className={styles["detail-film-info-name"]}>{item.name}.</Link>
+                                })
+                                }
+                            </span>
                         </p>
 
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
 
     );
 }
