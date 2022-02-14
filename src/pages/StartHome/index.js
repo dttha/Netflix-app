@@ -28,7 +28,10 @@ const StartHome = () => {
                     <div className={styles["banner-content"]}>
                         <div className={styles["banner-content-header"]}>
                             <a href="#" className={styles["logo"]}>Netflix</a>
-                            <Link className={styles["banner-content-signin"]} to="/sign-in">Sign in</Link>
+                            <div>
+                                <Link className={styles["banner-content-signin"]} to="/home">Home</Link>
+                                <Link className={styles["banner-content-signin"] + " " + styles["ml-16"]} to="/sign-in">Sign in</Link>
+                            </div>
                         </div>
 
                         <div className={styles["banner-content-wrap-text"]}>
