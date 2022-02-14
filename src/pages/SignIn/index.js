@@ -26,7 +26,7 @@ const SignIn = () => {
                             <Input label="Password" type={showPassword ? "text" : "password"} value={password} onChange={setPassword} styleInput={{ backgroundColor: "#303030", borderRadius: 4 }} styleContainer={{ maxWidth: "356px", marginTop: "15px" }} rightComponent={<div onClick={() => setShowPassword(!showPassword)}>SHOW</div>} />
                             <div className={styles["login-content-btn"]}>
                                 {/* <Link className={styles["p-font"]} to="/home">Sign In</Link> */}
-                                <p className={styles["p-font"]}>Sign In</p>
+                                <Link to="/home" className={styles["p-font"]}>Sign In</Link>
                             </div>
                             <p className={styles["login-content-register"]}>
                                 If you want to disconnect the app, go to the main
