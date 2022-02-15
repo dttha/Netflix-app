@@ -13,31 +13,38 @@ import TvShow from './pages/TvShow';
 import SingleRecommendation from './components/SingleRecommendation';
 import Movie from './pages/Movie';
 import Favorite from './pages/Favorite';
-
+import Loading from './components/Loading'
+import { useSelector } from 'react-redux';
+import TrailerModal from './components/TrailerModal';
 function App() {
+  const loading = useSelector((state) => state.user.isLoading)
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<StartHome />}></Route>
-        <Route path="sign-in" element={<SignIn />}></Route>
-        <Route path="home" element={<Home />}>
-          <Route path="movie/:id" element={<DetailFilm />}></Route>
-        </Route>
-        <Route path="account" element={<Account />}>
-          <Route path="movie/:id" element={<DetailFilm />}></Route>
-        </Route>
-        <Route path="tvshow" element={<TvShow />}>
-          <Route path="movie/:id" element={<DetailFilm />}></Route>
-        </Route>
-        <Route path="movie" element={<Movie />}>
-          <Route path="movie/:id" element={<DetailFilm />}></Route>
-        </Route>
-        <Route path="favorite" element={<Favorite />}>
-          <Route path="tv/:id" element={<DetailFilm />}></Route>
-          <Route path="movie/:id" element={<DetailFilm />}></Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<StartHome />}></Route>
+          <Route path="sign-in" element={<SignIn />}></Route>
+          <Route path="home" element={<Home />}>
+            <Route path="movie/:id" element={<DetailFilm />}></Route>
+          </Route>
+          <Route path="account" element={<Account />}>
+            <Route path="movie/:id" element={<DetailFilm />}></Route>
+          </Route>
+          <Route path="tvshow" element={<TvShow />}>
+            <Route path="movie/:id" element={<DetailFilm />}></Route>
+          </Route>
+          <Route path="movie" element={<Movie />}>
+            <Route path="movie/:id" element={<DetailFilm />}></Route>
+          </Route>
+          <Route path="favorite" element={<Favorite />}>
+            <Route path="tv/:id" element={<DetailFilm />}></Route>
+            <Route path="movie/:id" element={<DetailFilm />}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      {loading && <Loading />}
+      <TrailerModal />
+    </div>
   );
 }
 

@@ -2,23 +2,22 @@ import React from 'react';
 import styles from './styles.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight, faChevronDown, faChevronUp, faHeart, faStar, faTimes, faWindowClose } from '@fortawesome/free-solid-svg-icons'
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import RecommendationCategory from '../RecommendationCategory';
 import { useRef, useState } from 'react/cjs/react.development';
 import TrailerModal from '../TrailerModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { HOME_GET_ACTOR, HOME_GET_MOVIE_DETAIL } from '../../constants';
+import { HOME_GET_ACTOR, HOME_GET_MOVIE_DETAIL, HOME_GET_TRAILER } from '../../constants';
 import { URLs } from '../../constants/urls';
 
 const DetailFilm = () => {
     const navigate = useNavigate()
+    const { id } = useParams();
     const [visible, setVisible] = useState(false);
     const [isActive, setActive] = useState(false);
-    const { id } = useParams();
     const detailMovie = useSelector((state) => state.film.detailMovie)
     const actor = useSelector((state) => state.film.actor)
-    console.log("🚀 ~ file: index.js ~ line 21 ~ DetailFilm ~ actor", actor)
     const dispatch = useDispatch()
     useEffect(() => {
         const btnLike = document.getElementById("btn-like")
@@ -45,7 +44,8 @@ const DetailFilm = () => {
 
     const btnId = useRef(null)
     const onToggleClick = (e) => {
-        btnId.current.classList.add(styles["modal-trailer-add"]);
+        // btnId.current.classList.add(styles["modal-trailer-add"]);
+        dispatch({ type: HOME_GET_TRAILER, payload: id })
     };
 
     const data = [
@@ -203,11 +203,11 @@ const DetailFilm = () => {
                             <div className={styles["btn-trailer"]} onClick={onToggleClick}>
                                 <FontAwesomeIcon icon={faCaretRight} style={{ marginRight: 10, fontSize: 20 }}></FontAwesomeIcon>
                                 <span>Trailer</span>
-                                <div className={styles["modal-trailer"]} ref={btnId} onClick={() => {
+                                {/* <div className={styles["modal-trailer"]} ref={btnId} onClick={() => {
                                     navigate(0)
                                 }}>
                                     <TrailerModal />
-                                </div >
+                                </div > */}
                             </div>
                             <div className={styles["detail-film-btn-feel"]}>
                                 <div className={styles["btn-like"]} id="btn-like">

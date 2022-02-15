@@ -6,7 +6,17 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+.wrapper {
+  z-index: 999999999;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  transition: all 0.2s ease-in-out;
+}
 @media (max-width: 500px) {
   .jframe {
     width: 85vw;
