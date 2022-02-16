@@ -3,7 +3,7 @@ import { getActor, getFimlByGenresMovie, getGenresMovie, getGenresTv, getMovieDe
 import { HIDE_LOADING, HOME_GET_ACTOR, HOME_GET_ACTOR_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_MOVIE, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE, HOME_GET_GENRES_MOVIE_SUCCESS, HOME_GET_GENRES_TV, HOME_GET_GENRES_TV_SUCCESS, HOME_GET_MOVIE_DETAIL, HOME_GET_MOVIE_DETAIL_SUCCESS, HOME_GET_TRAILER, HOME_GET_TRAILER_FAIL, HOME_GET_TRAILER_SUCCESS, SHOW_LOADING } from '../constants';
 //hung
 
-function* getFilmMovieSaga({ payload }) {
+function* getFilmMovieSaga() {
     yield put({ type: SHOW_LOADING })
     try {
         const res = yield call(getTrendingMovieDay) // goi api
@@ -15,7 +15,7 @@ function* getFilmMovieSaga({ payload }) {
     }
 }
 
-function* getFilmTvSaga({ payload }) {
+function* getFilmTvSaga() {
     const res = yield call(getTrendingTvDay)
     yield put({ type: HOME_GET_FILM_TV_SUCCESS, payload: res.data.results })
 }
@@ -58,15 +58,12 @@ function* getMovieDetailSaga({ payload }) {
 
 function* getActorSaga({ payload }) {
     const res = yield call(getActor, payload)
-    console.log("🚀 ~ file: index.js ~ line 50 ~ function*getActorSaga ~ res", res)
     yield put({ type: HOME_GET_ACTOR_SUCCESS, payload: res.data })
 }
 
 function* getTrailerSaga({ payload }) {
-    console.log("🚀 ~ file: index.js ~ line 66 ~ function*getTrailerSaga ~ payload", payload)
     try {
         const res = yield call(getTrailer, payload)
-        console.log("🚀 ~ file: index.js ~ line 69 ~ function*getTrailerSaga ~ res", res)
         yield put({ type: HOME_GET_TRAILER_SUCCESS, payload: res.data.results[0] })
     } catch (e) {
         yield put({ type: HOME_GET_TRAILER_FAIL })

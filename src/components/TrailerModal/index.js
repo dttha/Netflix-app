@@ -2,11 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react/cjs/react.development';
-import { HOME_GET_TRAILER } from '../../constants';
+import { HOME_GET_TRAILER, HOME_GET_TRAILER_SUCCESS } from '../../constants';
 import styles from './styles.module.css'
 
 const TrailerModal = () => {
-    const [isActive, setActive] = useState(false);
     const trailerModal = useSelector((state) => state.film.trailer)
     const dispatch = useDispatch()
     const { id } = useParams();
@@ -16,7 +15,7 @@ const TrailerModal = () => {
     return (
         <div>
             {trailerModal &&
-                <div className={!isActive ? styles["wrapper"] : styles["wrapper"] + " " + styles["wrapper-hidden"]} onClick={() => setActive(!isActive)} tabIndex={0}>
+                <div className={styles["wrapper"]} onClick={() => dispatch({ type: HOME_GET_TRAILER_SUCCESS, payload: null })} tabIndex={0}>
                     <iframe
                         src={`https://www.youtube-nocookie.com/embed/${trailerModal.key}`}
                         title="YouTube video player"
