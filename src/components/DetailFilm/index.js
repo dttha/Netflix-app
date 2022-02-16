@@ -6,10 +6,10 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import RecommendationCategory from '../RecommendationCategory';
 import { useRef, useState } from 'react/cjs/react.development';
-import TrailerModal from '../TrailerModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { HOME_GET_ACTOR, HOME_GET_MOVIE_DETAIL, HOME_GET_TRAILER } from '../../constants';
 import { URLs } from '../../constants/urls';
+import TrailerModal from '../TrailerModal';
 
 const DetailFilm = () => {
     const navigate = useNavigate()
@@ -42,9 +42,7 @@ const DetailFilm = () => {
         setVisible(true);
     };
 
-    const btnId = useRef(null)
     const onToggleClick = (e) => {
-        // btnId.current.classList.add(styles["modal-trailer-add"]);
         dispatch({ type: HOME_GET_TRAILER, payload: id })
     };
 
@@ -203,11 +201,6 @@ const DetailFilm = () => {
                             <div className={styles["btn-trailer"]} onClick={onToggleClick}>
                                 <FontAwesomeIcon icon={faCaretRight} style={{ marginRight: 10, fontSize: 20 }}></FontAwesomeIcon>
                                 <span>Trailer</span>
-                                {/* <div className={styles["modal-trailer"]} ref={btnId} onClick={() => {
-                                    navigate(0)
-                                }}>
-                                    <TrailerModal />
-                                </div > */}
                             </div>
                             <div className={styles["detail-film-btn-feel"]}>
                                 <div className={styles["btn-like"]} id="btn-like">

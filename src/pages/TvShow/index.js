@@ -88,7 +88,7 @@ const TvShow = () => {
                 <div className={styles["container"]}>
                     <div className={styles["wrap-genres"]}>
                         <h5 className={styles["type"]}>Tv show</h5>
-                        <div className={styles["genres-select"]} id="genres-select" onClick={() => setActive(!isActive)} onBlur={() => setActive(false)} tabIndex={0}>
+                        <div className={styles["genres-select"]} onClick={() => setActive(!isActive)} onBlur={() => setActive(false)} tabIndex={0}>
                             <span className={styles["genres-span"]}>Genres</span>
                             <FontAwesomeIcon icon={faCaretDown} style={{ color: "white" }}></FontAwesomeIcon>
                             <ul className={!isActive ? styles["genres-list"] : styles["genres-list"] + " " + styles["add"]} onClick={(e) => {

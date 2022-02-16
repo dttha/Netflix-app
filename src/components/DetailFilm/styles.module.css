@@ -319,20 +319,6 @@
   width: 100%;
 }
 
-.modal-trailer {
-  z-index: 10001;
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.7);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow-y: scroll;
-  transition: all 0.2s ease-in-out;
-  opacity: 0;
-  visibility: hidden;
-}
-
 .modal-trailer-add {
   opacity: 1;
   visibility: visible;
