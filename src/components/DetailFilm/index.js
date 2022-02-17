@@ -2,14 +2,13 @@ import React from 'react';
 import styles from './styles.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight, faChevronDown, faChevronUp, faHeart, faStar, faTimes, faWindowClose } from '@fortawesome/free-solid-svg-icons'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import RecommendationCategory from '../RecommendationCategory';
 import { useRef, useState } from 'react/cjs/react.development';
 import { useDispatch, useSelector } from 'react-redux';
-import { HOME_GET_ACTOR, HOME_GET_MOVIE_DETAIL, HOME_GET_TRAILER } from '../../constants';
+import { HOME_GET_ACTOR, HOME_GET_MOVIE_DETAIL, HOME_GET_RECOMMEND_FILM, HOME_GET_TRAILER } from '../../constants';
 import { URLs } from '../../constants/urls';
-import TrailerModal from '../TrailerModal';
 
 const DetailFilm = () => {
     const navigate = useNavigate()
@@ -18,6 +17,7 @@ const DetailFilm = () => {
     const [isActive, setActive] = useState(false);
     const detailMovie = useSelector((state) => state.film.detailMovie)
     const actor = useSelector((state) => state.film.actor)
+    const listRecommendFilm = useSelector((state) => state.film.listRecommendFilm)
     const dispatch = useDispatch()
     useEffect(() => {
         const btnLike = document.getElementById("btn-like")
@@ -29,6 +29,7 @@ const DetailFilm = () => {
     useEffect(() => {
         dispatch({ type: HOME_GET_MOVIE_DETAIL, payload: id })
         dispatch({ type: HOME_GET_ACTOR, payload: id })
+        dispatch({ type: HOME_GET_RECOMMEND_FILM, payload: id })
     }, [])
     const upRef = useRef(null)
 
@@ -45,141 +46,6 @@ const DetailFilm = () => {
     const onToggleClick = (e) => {
         dispatch({ type: HOME_GET_TRAILER, payload: id })
     };
-
-    const data = [
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-        {
-            image: 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg',
-            title: "Don't Look Up",
-            date: "2021-12-07",
-            desc: "Two low-level astronomers must go on a giant media tour to warn humankind of an approaching comet that will destroy planet Earth."
-        },
-    ]
 
     return (
         <div className={styles["wrapper"]} onClick={() => {
@@ -270,7 +136,7 @@ const DetailFilm = () => {
                 <div className={styles["wrap-detail-film-info"]}>
                     <div className={styles["detail-film-recommend"]} ref={upRef}>
                         <span className={styles["detail-film-recommend-title"]}>Recommendation</span>
-                        <RecommendationCategory data={data}></RecommendationCategory>
+                        <RecommendationCategory data={listRecommendFilm}></RecommendationCategory>
                     </div>
                     <div className={styles["detail-film-recommend-more-btn"]}>
                         <div className={styles["detail-film-recommend-more-wrap-icon"]}>
@@ -284,11 +150,25 @@ const DetailFilm = () => {
                     <div className={styles["wrap-detail-film-final"]}>
                         <h6 className={styles["wrap-detail-film-final-more-info"]}>More info about {detailMovie.original_title}</h6>
                         <p className={styles["detail-film-info-title"]} style={{ marginTop: 10 }}>
-                            Director:<span className={styles["detail-film-info-name"]}> Chloé Zhao.</span>
+                            Director:<span className={styles["detail-film-info-name"]}>
+                                {actor.crew && actor.crew.filter((item, index) => index < 3).map((item, index) => {
+                                    return <span key={"crew" + index} className={styles["detail-film-info-name"]}> {item.name},{' '}</span>
+                                })
+                                }
+                            </span>
+                            {actor.crew?.length > 3 && <span style={{ color: 'white' }}>...</span>}
                         </p>
                         <p className={styles["detail-film-info-title"]} style={{ marginTop: 10 }}>
                             Actor:
-                            <span className={styles["detail-film-info-name"]}> Gemma Chan, Richard Madden, Angelina Jolie, Kumail Nanjiani, Barry Keoghan, Lauren Ridloff, Lia McHugh, Brian Tyree Henry, Ma Dong-seok, Salma Hayek, Kit Harington, Harish Patel, David Kaye, Bill Skarsgård, Haaz Sleiman, Esai Daniel Cross, Alan Scott, Hannah Dodd, Adria Escudero, Sebastián Viveros, Nikkita Chadha, Grahame Fox, Zain Al Rafeea, Alberto Rodríguez, Lucia Efstathiou, Derek Horsham, Jeff Mirza, Ascension Martinez Rubio, Ozer Ercan, Ariadna Vadillo Soto, Orson Rosenberg, Harry Styles, Patton Oswalt, Brenda Lorena Garcia, Sebastian Senior, Chloe Stannage, Mahershala Ali.</span>
+                            <span className={styles["detail-film-info-name"]}>
+                                {actor.cast && actor.cast?.map((item, index) => {
+                                    if (index !== (actor.cast && actor.cast?.length - 1))
+                                        return <span key={"actor" + index} className={styles["detail-film-info-name"]}> {item.name},{' '}</span>
+                                    else
+                                        return <span key={"actor" + index} className={styles["detail-film-info-name"]}>{item.name}.</span>
+                                })
+                                }
+                            </span>
                         </p>
                         <p className={styles["detail-film-info-title"]} style={{ marginTop: 10 }}>
                             Genres:

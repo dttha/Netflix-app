@@ -3,10 +3,8 @@ import styles from './styles.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import TrailerModal from '../TrailerModal';
-import { useEffect, useState } from 'react/cjs/react.development';
 import { useDispatch, useSelector } from 'react-redux';
-import { HOME_GET_MOVIE_DETAIL, HOME_GET_TRAILER } from '../../constants';
+import { HOME_GET_TRAILER } from '../../constants';
 import { URLs } from '../../constants/urls';
 
 const Banner = () => {

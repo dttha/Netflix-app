@@ -36,3 +36,7 @@ export const getActor = (id) => {
 export const getTrailer = (id) => {
     return axios.get('/movie/' + id + "/videos", { params: { api_key: apiKey, movie_id: id }, baseURL: URLs.baseUrl })
 }
+
+export const getRecommendFilm = (id) => {
+    return axios.get("/movie/" + id + "/recommendations", { params: { api_key: apiKey, movie_id: id }, baseURL: URLs.baseUrl })
+}

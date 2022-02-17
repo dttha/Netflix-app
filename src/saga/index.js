@@ -1,6 +1,6 @@
 import { call, delay, put, takeEvery, select, all } from 'redux-saga/effects';
-import { getActor, getFimlByGenresMovie, getGenresMovie, getGenresTv, getMovieDetail, getTrailer, getTrendingMovieDay, getTrendingTvDay } from '../apis/film';
-import { HIDE_LOADING, HOME_GET_ACTOR, HOME_GET_ACTOR_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_MOVIE, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE, HOME_GET_GENRES_MOVIE_SUCCESS, HOME_GET_GENRES_TV, HOME_GET_GENRES_TV_SUCCESS, HOME_GET_MOVIE_DETAIL, HOME_GET_MOVIE_DETAIL_SUCCESS, HOME_GET_TRAILER, HOME_GET_TRAILER_FAIL, HOME_GET_TRAILER_SUCCESS, SHOW_LOADING } from '../constants';
+import { getActor, getFimlByGenresMovie, getGenresMovie, getGenresTv, getMovieDetail, getRecommendFilm, getTrailer, getTrendingMovieDay, getTrendingTvDay } from '../apis/film';
+import { HIDE_LOADING, HOME_GET_ACTOR, HOME_GET_ACTOR_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_MOVIE, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE, HOME_GET_GENRES_MOVIE_SUCCESS, HOME_GET_GENRES_TV, HOME_GET_GENRES_TV_SUCCESS, HOME_GET_MOVIE_DETAIL, HOME_GET_MOVIE_DETAIL_SUCCESS, HOME_GET_RECOMMEND_FILM, HOME_GET_RECOMMEND_FILM_FAIL, HOME_GET_RECOMMEND_FILM_SUCCESS, HOME_GET_TRAILER, HOME_GET_TRAILER_FAIL, HOME_GET_TRAILER_SUCCESS, SHOW_LOADING } from '../constants';
 //hung
 
 function* getFilmMovieSaga() {
@@ -70,6 +70,15 @@ function* getTrailerSaga({ payload }) {
     }
 }
 
+function* getRecommendFilmSaga({ payload }) {
+    try {
+        const res = yield call(getRecommendFilm, payload);
+        yield put({ type: HOME_GET_RECOMMEND_FILM_SUCCESS, payload: res.data.results })
+    } catch (e) {
+        yield put({ type: HOME_GET_RECOMMEND_FILM_FAIL })
+    }
+}
+
 function* mySaga() {
     yield takeEvery(HOME_GET_FILM_MOVIE, getFilmMovieSaga) //4 lan
     yield takeEvery(HOME_GET_FILM_TV, getFilmTvSaga);
@@ -79,6 +88,7 @@ function* mySaga() {
     yield takeEvery(HOME_GET_MOVIE_DETAIL, getMovieDetailSaga)
     yield takeEvery(HOME_GET_ACTOR, getActorSaga)
     yield takeEvery(HOME_GET_TRAILER, getTrailerSaga)
+    yield takeEvery(HOME_GET_RECOMMEND_FILM, getRecommendFilmSaga)
 
 
     // yield takeLatest(HOME_GET_FILM_TV, getFilmTvSaga) //1 lan
