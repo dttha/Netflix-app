@@ -2,7 +2,7 @@ import styles from './styles.module.css'
 import React from 'react';
 import Header from '../../components/Header';
 import { NavLink, Outlet } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react/cjs/react.development';
+import { useEffect, useRef, useState } from 'react';
 import Category from '../../components/Category';
 import Footer from '../../components/Footer';
 

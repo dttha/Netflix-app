@@ -1,15 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './styles.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { useRef } from 'react/cjs/react.development';
 import { URLs } from '../../constants/urls';
 
 const SingleRecommendation = ({ recommendationBox }) => {
-    const btnId = useRef(null)
-    const onToggleClick = (e) => {
-        btnId.current.classList.toggle(styles["activeHeart-recommendation"]);
-    };
+    const [isActive, setActive] = useState(false)
     return (
         <div className={styles["wrapper"]}>
             <div className={styles["recommendation-banner"]}>
@@ -22,8 +18,8 @@ const SingleRecommendation = ({ recommendationBox }) => {
                         <span>{recommendationBox.release_date}</span>
                     </div>
                 </div>
-                <div className={styles["faHeart-recommendation"]} ref={btnId}>
-                    <FontAwesomeIcon icon={faHeart} onClick={onToggleClick}></FontAwesomeIcon>
+                <div className={`${styles["faHeart-recommendation"]} ${isActive ? styles["activeHeart-recommendation"] : ''}`} onClick={() => setActive(!isActive)}>
+                    <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                 </div>
             </div>
             <div className={styles["recommendation-desc"]}>

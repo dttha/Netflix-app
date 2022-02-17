@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react/cjs/react.development';
+import { useEffect, useState } from 'react';
 import { HOME_GET_TRAILER, HOME_GET_TRAILER_SUCCESS } from '../../constants';
 import styles from './styles.module.css'
 
