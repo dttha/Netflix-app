@@ -5,7 +5,7 @@ import { faCaretRight, faChevronDown, faChevronUp, faHeart, faStar, faTimes, faW
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import RecommendationCategory from '../RecommendationCategory';
-import { useRef, useState } from 'react/cjs/react.development';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HOME_GET_ACTOR, HOME_GET_MOVIE_DETAIL, HOME_GET_RECOMMEND_FILM, HOME_GET_TRAILER } from '../../constants';
 import { URLs } from '../../constants/urls';
