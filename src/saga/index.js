@@ -1,6 +1,6 @@
 import { call, delay, put, takeEvery, select, all } from 'redux-saga/effects';
-import { getActor, getFimlByGenresMovie, getGenresMovie, getGenresTv, getMovieDetail, getRecommendFilm, getTrailer, getTrendingMovieDay, getTrendingTvDay } from '../apis/film';
-import { HIDE_LOADING, HOME_GET_ACTOR, HOME_GET_ACTOR_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_MOVIE, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE, HOME_GET_GENRES_MOVIE_SUCCESS, HOME_GET_GENRES_TV, HOME_GET_GENRES_TV_SUCCESS, HOME_GET_MOVIE_DETAIL, HOME_GET_MOVIE_DETAIL_SUCCESS, HOME_GET_RECOMMEND_FILM, HOME_GET_RECOMMEND_FILM_FAIL, HOME_GET_RECOMMEND_FILM_SUCCESS, HOME_GET_TRAILER, HOME_GET_TRAILER_FAIL, HOME_GET_TRAILER_SUCCESS, SHOW_LOADING } from '../constants';
+import { getActor, getFimlByGenresMovie, getGenresMovie, getGenresTv, getMovieDetail, getRecommendFilm, getTrailer, getTrendingMovieDay, getTrendingTvDay, getTvDetail } from '../apis/film';
+import { HIDE_LOADING, HOME_GET_ACTOR, HOME_GET_ACTOR_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_MOVIE, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE, HOME_GET_GENRES_MOVIE_SUCCESS, HOME_GET_GENRES_TV, HOME_GET_GENRES_TV_SUCCESS, HOME_GET_MOVIE_DETAIL, HOME_GET_MOVIE_DETAIL_SUCCESS, HOME_GET_RECOMMEND_FILM, HOME_GET_RECOMMEND_FILM_FAIL, HOME_GET_RECOMMEND_FILM_SUCCESS, HOME_GET_TRAILER, HOME_GET_TRAILER_FAIL, HOME_GET_TRAILER_SUCCESS, HOME_GET_TV_DETAIL, HOME_GET_TV_DETAIL_SUCCESS, SHOW_LOADING } from '../constants';
 //hung
 
 function* getFilmMovieSaga() {
@@ -56,6 +56,18 @@ function* getMovieDetailSaga({ payload }) {
     }
 }
 
+function* getTvDetailSaga({ payload }) {
+    yield put({ type: SHOW_LOADING })
+    try {
+        const res = yield call(getTvDetail, payload)
+        yield put({ type: HOME_GET_TV_DETAIL_SUCCESS, payload: res.data })
+    } catch (e) {
+        console.log(e)
+    } finally {
+        yield put({ type: HIDE_LOADING })
+    }
+}
+
 function* getActorSaga({ payload }) {
     const res = yield call(getActor, payload)
     yield put({ type: HOME_GET_ACTOR_SUCCESS, payload: res.data })
@@ -86,6 +98,7 @@ function* mySaga() {
     yield takeEvery(HOME_GET_GENRES_TV, getGenresTvSaga)
     yield takeEvery(HOME_GET_FILM_BY_GENRE_MOVIE, getFilmByGenresSaga)
     yield takeEvery(HOME_GET_MOVIE_DETAIL, getMovieDetailSaga)
+    yield takeEvery(HOME_GET_TV_DETAIL, getTvDetailSaga)
     yield takeEvery(HOME_GET_ACTOR, getActorSaga)
     yield takeEvery(HOME_GET_TRAILER, getTrailerSaga)
     yield takeEvery(HOME_GET_RECOMMEND_FILM, getRecommendFilmSaga)
