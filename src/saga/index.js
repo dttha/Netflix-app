@@ -1,6 +1,6 @@
 import { call, delay, put, takeEvery, select, all } from 'redux-saga/effects';
 import { getActor, getFimlByGenresMovie, getFimlByGenresTv, getGenresMovie, getGenresTv, getMovieDetail, getRecommendFilm, getTrailer, getTrendingMovieDay, getTrendingTvDay, getTvDetail } from '../apis/film';
-import { HIDE_LOADING, HOME_GET_ACTOR, HOME_GET_ACTOR_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_BY_GENRE_TV, HOME_GET_FILM_BY_GENRE_TV_SUCCESS, HOME_GET_FILM_MOVIE, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE, HOME_GET_GENRES_MOVIE_SUCCESS, HOME_GET_GENRES_TV, HOME_GET_GENRES_TV_SUCCESS, HOME_GET_MOVIE_DETAIL, HOME_GET_MOVIE_DETAIL_SUCCESS, HOME_GET_RECOMMEND_FILM, HOME_GET_RECOMMEND_FILM_FAIL, HOME_GET_RECOMMEND_FILM_SUCCESS, HOME_GET_TRAILER, HOME_GET_TRAILER_FAIL, HOME_GET_TRAILER_SUCCESS, HOME_GET_TV_DETAIL, HOME_GET_TV_DETAIL_SUCCESS, SHOW_LOADING } from '../constants';
+import { HIDE_LOADING, HOME_GET_ACTOR, HOME_GET_ACTOR_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_ID, HOME_GET_FILM_BY_GENRE_MOVIE_ID_FAIL, HOME_GET_FILM_BY_GENRE_MOVIE_ID_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_BY_GENRE_TV, HOME_GET_FILM_BY_GENRE_TV_SUCCESS, HOME_GET_FILM_MOVIE, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE, HOME_GET_GENRES_MOVIE_SUCCESS, HOME_GET_GENRES_TV, HOME_GET_GENRES_TV_SUCCESS, HOME_GET_MOVIE_DETAIL, HOME_GET_MOVIE_DETAIL_SUCCESS, HOME_GET_RECOMMEND_FILM, HOME_GET_RECOMMEND_FILM_FAIL, HOME_GET_RECOMMEND_FILM_SUCCESS, HOME_GET_TRAILER, HOME_GET_TRAILER_FAIL, HOME_GET_TRAILER_SUCCESS, HOME_GET_TV_DETAIL, HOME_GET_TV_DETAIL_SUCCESS, SHOW_LOADING } from '../constants';
 //hung
 
 function* getFilmMovieSaga() {
@@ -37,7 +37,7 @@ function* getGenresTvSaga() {
     yield put({ type: HOME_GET_GENRES_TV_SUCCESS, payload: res.data.genres })
 }
 
-function* getMovieByGenresSaga() {
+function* getMovieByGenresSaga({ payload }) {
     const genresMovie = yield select((state) => state.film.genresMovie)
     const res = yield all(genresMovie.map((item) => {
         return call(getFimlByGenresMovie, item.id)
@@ -112,6 +112,15 @@ function* getRecommendFilmSaga({ payload }) {
     }
 }
 
+function* getFilmByGenreMovieIdSaga({ payload }) {
+    try {
+        const res = yield call(getFimlByGenresMovie, payload.id);
+        yield put({ type: HOME_GET_FILM_BY_GENRE_MOVIE_ID_SUCCESS, payload: { genre: payload, results: res.data.results } })
+    } catch (e) {
+        yield put({ type: HOME_GET_FILM_BY_GENRE_MOVIE_ID_FAIL })
+    }
+}
+
 function* mySaga() {
     yield takeEvery(HOME_GET_FILM_MOVIE, getFilmMovieSaga) //4 lan
     yield takeEvery(HOME_GET_FILM_TV, getFilmTvSaga);
@@ -124,6 +133,7 @@ function* mySaga() {
     yield takeEvery(HOME_GET_ACTOR, getActorSaga)
     yield takeEvery(HOME_GET_TRAILER, getTrailerSaga)
     yield takeEvery(HOME_GET_RECOMMEND_FILM, getRecommendFilmSaga)
+    yield takeEvery(HOME_GET_FILM_BY_GENRE_MOVIE_ID, getFilmByGenreMovieIdSaga)
 
 
     // yield takeLatest(HOME_GET_FILM_TV, getFilmTvSaga) //1 lan

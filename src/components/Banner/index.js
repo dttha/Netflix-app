@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { HOME_GET_TRAILER } from '../../constants';
 import { URLs } from '../../constants/urls';
 
-const Banner = () => {
+const Banner = ({ detailMovie }) => {
     const location = useLocation()
-    const detailMovie = useSelector((state) => state.film.listMovie[0])
+    // const detailMovie = useSelector((state) => state.film.listMovie[0])
     const navigate = useNavigate()
     const dispatch = useDispatch()
 

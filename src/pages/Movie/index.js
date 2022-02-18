@@ -8,13 +8,13 @@ import Banner from '../../components/Banner';
 import Category from '../../components/Category';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
-import { HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_GENRES_MOVIE } from '../../constants';
+import { HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_ID, HOME_GET_GENRES_MOVIE } from '../../constants';
 import styles from './styles.module.css'
 
 const Movie = () => {
     const [isActive, setActive] = useState(false);
     const genresMovie = useSelector((state) => state.film.genresMovie)
-    const listMovieByGenres = useSelector((state) => state.film.listMovieByGenres)
+    const listMovieByGenreId = useSelector((state) => state.film.listMovieByGenreId)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const Movie = () => {
 
     useEffect(() => {
         if (genresMovie.length > 0) {
-            dispatch({ type: HOME_GET_FILM_BY_GENRE_MOVIE })
+            dispatch({ type: HOME_GET_FILM_BY_GENRE_MOVIE_ID, payload: genresMovie[0] })
         }
     }, [genresMovie])
 
@@ -54,7 +54,7 @@ const Movie = () => {
                                 {genresMovie.map((item, index) => {
                                     return (
                                         <div className={styles["genres-link"]} key={"genres" + index}
-                                            onClick={() => dispatch({ type: HOME_GET_FILM_BY_GENRE_MOVIE, payload: item.id })}>
+                                            onClick={() => dispatch({ type: HOME_GET_FILM_BY_GENRE_MOVIE_ID, payload: item })}>
                                             {item.name}
                                         </div>
                                     )
@@ -65,20 +65,15 @@ const Movie = () => {
                     </div>
                 </div>
             </div>
-            <Banner />
+            <Banner detailMovie={listMovieByGenreId?.results?.[0]} />
             <div className={styles["tvshow"]}>
                 <div className={styles["container"]}>
                     <div className={styles["category-title"]}>
                         {genresMovie.length > 0 &&
-                            genresMovie[0].name
+                            listMovieByGenreId?.genre?.name
                         }
                     </div>
-                    {listMovieByGenres.map((item, index) => {
-                        return (
-                            <Category key={"filmGenres" + index} data={item.results}></Category>
-                        )
-                    }
-                    )}
+                    <Category data={listMovieByGenreId.results}></Category>
                 </div>
             </div>
             <Footer />

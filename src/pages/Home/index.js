@@ -5,12 +5,14 @@ import ContentHome from '../../components/ContentHome';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import styles from './styles.module.css'
+import { useSelector } from 'react-redux';
 
 const Home = () => {
+    const listMovie = useSelector((state) => state.film.listMovie)
     return (
         <div className={styles["wrapper"]} id="home">
             <Header />
-            <Banner />
+            <Banner detailMovie={listMovie?.[0]} />
             <ContentHome />
             <Footer />
             <Outlet />
