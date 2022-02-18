@@ -8,7 +8,7 @@ const ContentHome = () => {
     const listMovie = useSelector((state) => state.film.listMovie)
     const listTv = useSelector((state) => state.film.listTv)
     const genresMovie = useSelector((state) => state.film.genresMovie)
-    const listFilmByGenres = useSelector((state) => state.film.listFilmByGenres)
+    const listMovieByGenres = useSelector((state) => state.film.listMovieByGenres)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const ContentHome = () => {
 
             <SwiperHome title="Popular Movies" data={listMovie}></SwiperHome>
             <SwiperHome title="Popular TvShows" data={listTv}></SwiperHome>
-            {listFilmByGenres.map((item, index) => {
+            {listMovieByGenres.map((item, index) => {
                 return (
                     <SwiperHome key={"filmGenres" + index} title={item.genres.name} data={item.results}></SwiperHome>
                 )

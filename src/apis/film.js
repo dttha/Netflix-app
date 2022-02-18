@@ -25,6 +25,10 @@ export const getFimlByGenresMovie = (genres) => {
     return axios.get('/discover/movie', { params: { api_key: apiKey, with_genres: genres }, baseURL: URLs.baseUrl })
 }
 
+export const getFimlByGenresTv = (genres) => {
+    return axios.get('/discover/tv', { params: { api_key: apiKey, with_genres: genres }, baseURL: URLs.baseUrl })
+}
+
 export const getMovieDetail = (id) => {
     return axios.get('/movie/' + id, { params: { api_key: apiKey, movie_id: id }, baseURL: URLs.baseUrl })
 }

@@ -5,8 +5,8 @@ import SingleFilm from '../SingleFilm';
 const Category = ({ data }) => {
     return (
         <div className={styles["category-wrap"]}>
-            {data && data.map((item) => {
-                return <SingleFilm singleFilm={item}></SingleFilm>
+            {data && data.map((item, index) => {
+                return <SingleFilm key={"singleFilm" + index} singleFilm={item}></SingleFilm>
             })}
         </div>
     );

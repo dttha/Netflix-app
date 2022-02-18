@@ -1,12 +1,23 @@
 import styles from './styles.module.css'
 import React from 'react';
 import Header from '../../components/Header';
-import { NavLink, Outlet } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 import Category from '../../components/Category';
 import Footer from '../../components/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { HOME_GET_FILM_MOVIE, HOME_GET_FILM_TV } from '../../constants';
 
 const Favorite = () => {
+    const listMovie = useSelector((state) => state.film.listMovie)
+    const listTv = useSelector((state) => state.film.listTv)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch({ type: HOME_GET_FILM_MOVIE })
+        dispatch({ type: HOME_GET_FILM_TV })
+    }, [])
+
     useEffect(() => {
         const tabTv = document.getElementById("tabTv");
         const tabMovie = document.getElementById("tabMovie");
@@ -35,109 +46,6 @@ const Favorite = () => {
         tabTvRef.current.classList.remove(styles["favorite-content-tv"]);
     };
 
-
-    const data1 = [
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title1"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title2"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title3"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title4"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title5"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title6"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title2"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title3"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title4"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title5"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title6"
-        }
-    ]
-
-    const data2 = [
-        {
-            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
-            title: "title"
-        },
-        {
-            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
-            title: "title1"
-        },
-        {
-            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
-            title: "title2"
-        },
-        {
-            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
-            title: "title3"
-        },
-        {
-            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
-            title: "title4"
-        },
-        {
-            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
-            title: "title5"
-        },
-        {
-            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
-            title: "title6"
-        },
-        {
-            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
-            title: "title2"
-        },
-        {
-            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
-            title: "title3"
-        },
-        {
-            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
-            title: "title4"
-        },
-        {
-            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
-            title: "title5"
-        },
-        {
-            image: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces//qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
-            title: "title6"
-        }
-    ]
-
     return (
         <div className={styles["wrapper"]}>
             <Header />
@@ -148,10 +56,10 @@ const Favorite = () => {
                         <span id="tabTv" className={styles['favorite-type-link']} onClick={onClickTv}>Tvshow</span>
                     </div>
                     <div className={styles['favorite-content-movie']} ref={tabMovieRef}>
-                        <Category data={data1}></Category>
+                        <Category data={listMovie}></Category>
                     </div>
                     <div className={styles['favorite-content-tv-hidden']} ref={tabTvRef}>
-                        <Category data={data2}></Category>
+                        <Category data={listTv}></Category>
                     </div>
                 </div>
             </div>

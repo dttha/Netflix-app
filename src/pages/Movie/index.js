@@ -2,7 +2,7 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import Banner from '../../components/Banner';
 import Category from '../../components/Category';
@@ -14,11 +14,19 @@ import styles from './styles.module.css'
 const Movie = () => {
     const [isActive, setActive] = useState(false);
     const genresMovie = useSelector((state) => state.film.genresMovie)
+    const listMovieByGenres = useSelector((state) => state.film.listMovieByGenres)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch({ type: HOME_GET_GENRES_MOVIE })
     }, [])
+
+    useEffect(() => {
+        if (genresMovie.length > 0) {
+            dispatch({ type: HOME_GET_FILM_BY_GENRE_MOVIE })
+        }
+    }, [genresMovie])
+
     useEffect(() => {
         const genres = document.getElementById("genres")
         window.addEventListener("scroll", () => {
@@ -30,56 +38,6 @@ const Movie = () => {
         })
     }, [])
 
-    const data = [
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title1"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title2"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title3"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title4"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title5"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title6"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title2"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title3"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title4"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title5"
-        },
-        {
-            image: 'https://themoviedb.org/t/p/w355_and_h200_multi_faces//EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg',
-            title: "title6"
-        }
-    ]
     return (
         <div className={styles["wrapper"]} >
             <Header />
@@ -93,9 +51,12 @@ const Movie = () => {
                             <ul className={!isActive ? styles["genres-list"] : styles["genres-list"] + " " + styles["add"]} onClick={(e) => {
                                 e.stopPropagation()
                             }}>
-                                {genresMovie.map((item) => {
+                                {genresMovie.map((item, index) => {
                                     return (
-                                        <Link className={styles["genres-link"]} to="/tvshow/:id">{item.name}</Link>
+                                        <div className={styles["genres-link"]} key={"genres" + index}
+                                            onClick={() => dispatch({ type: HOME_GET_FILM_BY_GENRE_MOVIE, payload: item.id })}>
+                                            {item.name}
+                                        </div>
                                     )
                                 }
                                 )}
@@ -108,9 +69,16 @@ const Movie = () => {
             <div className={styles["tvshow"]}>
                 <div className={styles["container"]}>
                     <div className={styles["category-title"]}>
-                        Action
+                        {genresMovie.length > 0 &&
+                            genresMovie[0].name
+                        }
                     </div>
-                    <Category data={data}></Category>
+                    {listMovieByGenres.map((item, index) => {
+                        return (
+                            <Category key={"filmGenres" + index} data={item.results}></Category>
+                        )
+                    }
+                    )}
                 </div>
             </div>
             <Footer />

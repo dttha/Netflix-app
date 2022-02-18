@@ -1,6 +1,6 @@
 import './App.css';
 import StartHome from './pages/StartHome';
-import { Routes, Route, BrowserRouter, Link } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import 'swiper/css';
@@ -10,7 +10,6 @@ import 'swiper/css/scrollbar';
 import DetailFilm from './components/DetailFilm';
 import Account from './pages/Account';
 import TvShow from './pages/TvShow';
-import SingleRecommendation from './components/SingleRecommendation';
 import Movie from './pages/Movie';
 import Favorite from './pages/Favorite';
 import Loading from './components/Loading'
@@ -18,6 +17,7 @@ import { useSelector } from 'react-redux';
 import TrailerModal from './components/TrailerModal';
 function App() {
   const loading = useSelector((state) => state.user.isLoading)
+
   return (
     <div>
       <BrowserRouter>
