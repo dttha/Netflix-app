@@ -8,13 +8,14 @@ import Banner from '../../components/Banner';
 import Category from '../../components/Category';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
-import { HOME_GET_FILM_BY_GENRE_TV, HOME_GET_GENRES_TV } from '../../constants';
+import { HOME_GET_FILM_BY_GENRE_TV_ID, HOME_GET_GENRES_TV } from '../../constants';
 import styles from './styles.module.css'
 
 const TvShow = () => {
     const [isActive, setActive] = useState(false);
     const genresTv = useSelector((state) => state.film.genresTv)
-    const listTvByGenres = useSelector((state) => state.film.listTvByGenres)
+    const listTvByGenreId = useSelector((state) => state.film.listTvByGenreId)
+
     const dispatch = useDispatch()
     useEffect(() => {
         const genres = document.getElementById("genres")
@@ -33,7 +34,7 @@ const TvShow = () => {
 
     useEffect(() => {
         if (genresTv.length > 0) {
-            dispatch({ type: HOME_GET_FILM_BY_GENRE_TV })
+            dispatch({ type: HOME_GET_FILM_BY_GENRE_TV_ID, payload: genresTv[0] })
         }
     }, [genresTv])
 
@@ -50,9 +51,12 @@ const TvShow = () => {
                             <ul className={!isActive ? styles["genres-list"] : styles["genres-list"] + " " + styles["add"]} onClick={(e) => {
                                 e.stopPropagation()
                             }}>
-                                {genresTv.map((item) => {
+                                {genresTv.map((item, index) => {
                                     return (
-                                        <Link className={styles["genres-link"]} to="/tvshow/:id">{item.name}</Link>
+                                        <div className={styles["genres-link"]} key={"genres" + index}
+                                            onClick={() => dispatch({ type: HOME_GET_FILM_BY_GENRE_TV_ID, payload: item })}>
+                                            {item.name}
+                                        </div>
                                     )
                                 }
                                 )}
@@ -61,20 +65,15 @@ const TvShow = () => {
                     </div>
                 </div>
             </div>
-            <Banner />
+            <Banner detailMovie={listTvByGenreId?.results?.[0]} />
             <div className={styles["tvshow"]}>
                 <div className={styles["container"]}>
                     <div className={styles["category-title"]}>
                         {genresTv.length > 0 &&
-                            genresTv[0].name
+                            listTvByGenreId?.genre?.name
                         }
                     </div>
-                    {listTvByGenres.map((item, index) => {
-                        return (
-                            <Category key={"filmGenres" + index} data={item.results}></Category>
-                        )
-                    }
-                    )}
+                    <Category data={listTvByGenreId.results}></Category>
                 </div>
             </div>
             <Footer />

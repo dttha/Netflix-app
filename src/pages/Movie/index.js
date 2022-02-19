@@ -8,7 +8,7 @@ import Banner from '../../components/Banner';
 import Category from '../../components/Category';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
-import { HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_ID, HOME_GET_GENRES_MOVIE } from '../../constants';
+import { HOME_GET_FILM_BY_GENRE_MOVIE_ID, HOME_GET_GENRES_MOVIE } from '../../constants';
 import styles from './styles.module.css'
 
 const Movie = () => {

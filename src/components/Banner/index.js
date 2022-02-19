@@ -9,7 +9,6 @@ import { URLs } from '../../constants/urls';
 
 const Banner = ({ detailMovie }) => {
     const location = useLocation()
-    // const detailMovie = useSelector((state) => state.film.listMovie[0])
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
