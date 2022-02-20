@@ -1,6 +1,6 @@
 import { call, delay, put, takeEvery, select, all } from 'redux-saga/effects';
-import { getActor, getFimlByGenresMovie, getFimlByGenresTv, getGenresMovie, getGenresTv, getMovieDetail, getRecommendFilm, getTrailer, getTrendingMovieDay, getTrendingTvDay, getTvDetail } from '../apis/film';
-import { HIDE_LOADING, HOME_GET_ACTOR, HOME_GET_ACTOR_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_ID, HOME_GET_FILM_BY_GENRE_MOVIE_ID_FAIL, HOME_GET_FILM_BY_GENRE_MOVIE_ID_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_BY_GENRE_TV, HOME_GET_FILM_BY_GENRE_TV_ID, HOME_GET_FILM_BY_GENRE_TV_ID_FAIL, HOME_GET_FILM_BY_GENRE_TV_ID_SUCCESS, HOME_GET_FILM_BY_GENRE_TV_SUCCESS, HOME_GET_FILM_MOVIE, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE, HOME_GET_GENRES_MOVIE_SUCCESS, HOME_GET_GENRES_TV, HOME_GET_GENRES_TV_SUCCESS, HOME_GET_MOVIE_DETAIL, HOME_GET_MOVIE_DETAIL_SUCCESS, HOME_GET_RECOMMEND_FILM, HOME_GET_RECOMMEND_FILM_FAIL, HOME_GET_RECOMMEND_FILM_SUCCESS, HOME_GET_TRAILER, HOME_GET_TRAILER_FAIL, HOME_GET_TRAILER_SUCCESS, HOME_GET_TV_DETAIL, HOME_GET_TV_DETAIL_SUCCESS, SHOW_LOADING } from '../constants';
+import { checkLogin, createSession, getActor, getFimlByGenresMovie, getFimlByGenresTv, getGenresMovie, getGenresTv, getMovieDetail, getRecommendFilm, getRequestToken, getTrailer, getTrendingMovieDay, getTrendingTvDay, getTvDetail, getAccountDetail } from '../apis/film';
+import { GET_ACCOUNT, GET_ACCOUNT_SUCCESS, HIDE_LOADING, HOME_GET_ACTOR, HOME_GET_ACTOR_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_ID, HOME_GET_FILM_BY_GENRE_MOVIE_ID_FAIL, HOME_GET_FILM_BY_GENRE_MOVIE_ID_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_BY_GENRE_TV, HOME_GET_FILM_BY_GENRE_TV_ID, HOME_GET_FILM_BY_GENRE_TV_ID_FAIL, HOME_GET_FILM_BY_GENRE_TV_ID_SUCCESS, HOME_GET_FILM_BY_GENRE_TV_SUCCESS, HOME_GET_FILM_MOVIE, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE, HOME_GET_GENRES_MOVIE_SUCCESS, HOME_GET_GENRES_TV, HOME_GET_GENRES_TV_SUCCESS, HOME_GET_MOVIE_DETAIL, HOME_GET_MOVIE_DETAIL_SUCCESS, HOME_GET_RECOMMEND_FILM, HOME_GET_RECOMMEND_FILM_FAIL, HOME_GET_RECOMMEND_FILM_SUCCESS, HOME_GET_TRAILER, HOME_GET_TRAILER_FAIL, HOME_GET_TRAILER_SUCCESS, HOME_GET_TV_DETAIL, HOME_GET_TV_DETAIL_SUCCESS, SHOW_LOADING } from '../constants';
 //hung
 
 function* getFilmMovieSaga() {
@@ -130,6 +130,21 @@ function* getFilmByGenreTvIdSaga({ payload }) {
     }
 }
 
+function* getAccountSaga({ payload }) {
+    yield put({ type: SHOW_LOADING })
+    try {
+        const res = yield call(getRequestToken);
+        const res1 = yield call(checkLogin, { ...payload, request_token: res.data.request_token });
+        const res2 = yield call(createSession, { request_token: res.data.request_token })
+        const res3 = yield call(getAccountDetail, res2.data.session_id)
+        yield put({ type: GET_ACCOUNT_SUCCESS, payload: { ...res3.data, session_id: res2.data.session_id } })
+    } catch (e) {
+        console.log("lỗi", e);
+    } finally {
+        yield put({ type: HIDE_LOADING })
+    }
+}
+
 function* mySaga() {
     yield takeEvery(HOME_GET_FILM_MOVIE, getFilmMovieSaga) //4 lan
     yield takeEvery(HOME_GET_FILM_TV, getFilmTvSaga);
@@ -144,6 +159,7 @@ function* mySaga() {
     yield takeEvery(HOME_GET_RECOMMEND_FILM, getRecommendFilmSaga)
     yield takeEvery(HOME_GET_FILM_BY_GENRE_MOVIE_ID, getFilmByGenreMovieIdSaga)
     yield takeEvery(HOME_GET_FILM_BY_GENRE_TV_ID, getFilmByGenreTvIdSaga)
+    yield takeEvery(GET_ACCOUNT, getAccountSaga)
 
 
     // yield takeLatest(HOME_GET_FILM_TV, getFilmTvSaga) //1 lan

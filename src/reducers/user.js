@@ -1,8 +1,8 @@
-import { HIDE_LOADING, SHOW_LOADING } from "../constants"
+import { GET_ACCOUNT_SUCCESS, HIDE_LOADING, SHOW_LOADING } from "../constants"
 
 const initialState = {
     isLogin: false,
-    userId: null,
+    user: null,
     isLoading: false
 }
 const userReducer = (state = initialState, action) => {
@@ -17,6 +17,13 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false
+            }
+        }
+        case GET_ACCOUNT_SUCCESS: {
+            return {
+                ...state,
+                user: action.payload,
+                isLogin: true
             }
         }
     }

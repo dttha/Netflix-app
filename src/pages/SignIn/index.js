@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../../components/Footer';
 import Input from '../../components/Input';
 import styles from './styles.module.css'
+import { GET_ACCOUNT } from "../../constants"
+import { useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-
+    const [username, setUserName] = useState("thuha140");
+    const isLogin = useSelector((state) => state.user.isLogin)
+    const navigate = useNavigate()
+    const [password, setPassword] = useState("thuha140");
     const [showPassword, setShowPassword] = useState(false);
 
     const [visible, setVisible] = useState(false);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (isLogin) {
+            navigate('/home')
+        }
+    }, [isLogin])
 
     return (
         <div className={styles["wrapper"]}>
@@ -22,11 +32,16 @@ const SignIn = () => {
                         </div>
                         <div className={styles["login-content-form"]}>
                             <h6 className={styles["form-title"]}>Sign In</h6>
-                            <Input label="Username or phone" value={username} onChange={setUsername} styleInput={{ backgroundColor: "#303030", borderRadius: 4 }} styleContainer={{ maxWidth: "356px" }} />
-                            <Input label="Password" type={showPassword ? "text" : "password"} value={password} onChange={setPassword} styleInput={{ backgroundColor: "#303030", borderRadius: 4 }} styleContainer={{ maxWidth: "356px", marginTop: "15px" }} rightComponent={<div onClick={() => setShowPassword(!showPassword)}>SHOW</div>} />
+                            <Input label="Username or phone" value={username} onChange={setUserName} styleInput={{ backgroundColor: "#303030", borderRadius: 4 }} styleContainer={{ maxWidth: "356px" }} />
+                            <Input label="Password" value={password} onChange={setPassword} type={showPassword ? "text" : "password"} styleInput={{ backgroundColor: "#303030", borderRadius: 4 }} styleContainer={{ maxWidth: "356px", marginTop: "15px" }} rightComponent={<div onClick={() => setShowPassword(!showPassword)}>SHOW</div>} />
                             <div className={styles["login-content-btn"]}>
-                                {/* <Link className={styles["p-font"]} to="/home">Sign In</Link> */}
-                                <Link to="/home" className={styles["p-font"]}>Sign In</Link>
+                                <div onClick={() => dispatch({
+                                    type: GET_ACCOUNT,
+                                    payload: {
+                                        username,
+                                        password
+                                    }
+                                })} className={styles["p-font"]} >Sign In</div>
                             </div>
                             <p className={styles["login-content-register"]}>
                                 If you want to disconnect the app, go to the main
