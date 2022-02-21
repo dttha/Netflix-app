@@ -12,7 +12,7 @@ import { URLs } from '../../constants/urls';
 
 const DetailFilm = () => {
     const navigate = useNavigate()
-    const { id } = useParams();
+    const { id, type } = useParams();
     const [visible, setVisible] = useState(false);
     const [isActive, setActive] = useState(false);
     const detailMovie = useSelector((state) => state.film.detailMovie)
@@ -27,9 +27,9 @@ const DetailFilm = () => {
         })
     }, [])
     useEffect(() => {
-        dispatch({ type: HOME_GET_MOVIE_DETAIL, payload: id })
-        dispatch({ type: HOME_GET_ACTOR, payload: id })
-        dispatch({ type: HOME_GET_RECOMMEND_FILM, payload: id })
+        dispatch({ type: HOME_GET_MOVIE_DETAIL, payload: { id, type } })
+        dispatch({ type: HOME_GET_ACTOR, payload: { id, type } })
+        dispatch({ type: HOME_GET_RECOMMEND_FILM, payload: { id, type } })
     }, [])
     const upRef = useRef(null)
 
@@ -44,7 +44,7 @@ const DetailFilm = () => {
     };
 
     const onToggleClick = (e) => {
-        dispatch({ type: HOME_GET_TRAILER, payload: id })
+        dispatch({ type: HOME_GET_TRAILER, payload: { id, type } })
     };
 
     return (

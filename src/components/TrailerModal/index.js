@@ -8,9 +8,9 @@ import styles from './styles.module.css'
 const TrailerModal = () => {
     const trailerModal = useSelector((state) => state.film.trailer)
     const dispatch = useDispatch()
-    const { id } = useParams();
+    const { id, type } = useParams();
     useEffect(() => {
-        dispatch({ type: HOME_GET_TRAILER, payload: id })
+        dispatch({ type: HOME_GET_TRAILER, payload: { id, type } })
     }, [])
     return (
         <div>

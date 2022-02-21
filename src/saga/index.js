@@ -1,5 +1,6 @@
 import { call, delay, put, takeEvery, select, all } from 'redux-saga/effects';
-import { checkLogin, createSession, getActor, getFimlByGenresMovie, getFimlByGenresTv, getGenresMovie, getGenresTv, getMovieDetail, getRecommendFilm, getRequestToken, getTrailer, getTrendingMovieDay, getTrendingTvDay, getTvDetail, getAccountDetail } from '../apis/film';
+import { getActor, getActorMovie, getActorTv, getFimlByGenresMovie, getFimlByGenresTv, getGenresMovie, getGenresTv, getMovieDetail, getRecommendFilm, getRecommendFilmMovie, getRecommendFilmTv, getTrailer, getTrailerMovie, getTrailerTv, getTrendingMovieDay, getTrendingTvDay, getTvDetail } from '../apis/film';
+import { checkLogin, createSession, getRequestToken, getAccountDetail } from '../apis/user';
 import { GET_ACCOUNT, GET_ACCOUNT_SUCCESS, HIDE_LOADING, HOME_GET_ACTOR, HOME_GET_ACTOR_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE, HOME_GET_FILM_BY_GENRE_MOVIE_ID, HOME_GET_FILM_BY_GENRE_MOVIE_ID_FAIL, HOME_GET_FILM_BY_GENRE_MOVIE_ID_SUCCESS, HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, HOME_GET_FILM_BY_GENRE_TV, HOME_GET_FILM_BY_GENRE_TV_ID, HOME_GET_FILM_BY_GENRE_TV_ID_FAIL, HOME_GET_FILM_BY_GENRE_TV_ID_SUCCESS, HOME_GET_FILM_BY_GENRE_TV_SUCCESS, HOME_GET_FILM_MOVIE, HOME_GET_FILM_MOVIE_SUCCESS, HOME_GET_FILM_TV, HOME_GET_FILM_TV_SUCCESS, HOME_GET_GENRES_MOVIE, HOME_GET_GENRES_MOVIE_SUCCESS, HOME_GET_GENRES_TV, HOME_GET_GENRES_TV_SUCCESS, HOME_GET_MOVIE_DETAIL, HOME_GET_MOVIE_DETAIL_SUCCESS, HOME_GET_RECOMMEND_FILM, HOME_GET_RECOMMEND_FILM_FAIL, HOME_GET_RECOMMEND_FILM_SUCCESS, HOME_GET_TRAILER, HOME_GET_TRAILER_FAIL, HOME_GET_TRAILER_SUCCESS, HOME_GET_TV_DETAIL, HOME_GET_TV_DETAIL_SUCCESS, SHOW_LOADING } from '../constants';
 //hung
 
@@ -45,7 +46,10 @@ function* getMovieByGenresSaga({ payload }) {
     const resMap = res.map((item, index) => {
         return {
             genres: genresMovie[index],
-            results: item.data.results
+            results: item.data.results.map((item) => ({
+                ...item,
+                type: "movie"
+            }))
         }
     })
     yield put({ type: HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, payload: resMap })
@@ -59,7 +63,11 @@ function* getTvByGenresSaga() {
     const resMap = res.map((item, index) => {
         return {
             genres: genresTv[index],
-            results: item.data.results
+            results: item.data.results.map((item) => ({
+                ...item,
+                title: item.original_name,
+                type: "tv"
+            }))
         }
     })
     yield put({ type: HOME_GET_FILM_BY_GENRE_TV_SUCCESS, payload: resMap })
@@ -68,20 +76,17 @@ function* getTvByGenresSaga() {
 function* getMovieDetailSaga({ payload }) {
     yield put({ type: SHOW_LOADING })
     try {
-        const res = yield call(getMovieDetail, payload)
-        yield put({ type: HOME_GET_MOVIE_DETAIL_SUCCESS, payload: res.data })
-    } catch (e) {
-        console.log(e)
-    } finally {
-        yield put({ type: HIDE_LOADING })
-    }
-}
-
-function* getTvDetailSaga({ payload }) {
-    yield put({ type: SHOW_LOADING })
-    try {
-        const res = yield call(getTvDetail, payload)
-        yield put({ type: HOME_GET_TV_DETAIL_SUCCESS, payload: res.data })
+        if (payload.type === "movie") {
+            const res = yield call(getMovieDetail, payload.id)
+            yield put({ type: HOME_GET_MOVIE_DETAIL_SUCCESS, payload: res.data })
+        }
+        else {
+            const res = yield call(getTvDetail, payload.id)
+            res.data.original_title = res.data.original_name
+            res.data.release_date = res.data.first_air_date
+            // res.data.runtime = res.data.first_air_date
+            yield put({ type: HOME_GET_MOVIE_DETAIL_SUCCESS, payload: res.data })
+        }
     } catch (e) {
         console.log(e)
     } finally {
@@ -90,14 +95,28 @@ function* getTvDetailSaga({ payload }) {
 }
 
 function* getActorSaga({ payload }) {
-    const res = yield call(getActor, payload)
-    yield put({ type: HOME_GET_ACTOR_SUCCESS, payload: res.data })
+    try {
+        if (payload.type === 'movie') {
+            const res = yield call(getActorMovie, payload.id)
+            yield put({ type: HOME_GET_ACTOR_SUCCESS, payload: res.data })
+        } else {
+            const res = yield call(getActorTv, payload.id)
+            yield put({ type: HOME_GET_ACTOR_SUCCESS, payload: res.data })
+        }
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function* getTrailerSaga({ payload }) {
     try {
-        const res = yield call(getTrailer, payload)
-        yield put({ type: HOME_GET_TRAILER_SUCCESS, payload: res.data.results[0] })
+        if (payload.type === 'movie') {
+            const res = yield call(getTrailerMovie, payload.id)
+            yield put({ type: HOME_GET_TRAILER_SUCCESS, payload: res.data.results[0] })
+        } else {
+            const res = yield call(getTrailerTv, payload.id)
+            yield put({ type: HOME_GET_TRAILER_SUCCESS, payload: res.data.results[0] })
+        }
     } catch (e) {
         yield put({ type: HOME_GET_TRAILER_FAIL })
     }
@@ -105,8 +124,13 @@ function* getTrailerSaga({ payload }) {
 
 function* getRecommendFilmSaga({ payload }) {
     try {
-        const res = yield call(getRecommendFilm, payload);
-        yield put({ type: HOME_GET_RECOMMEND_FILM_SUCCESS, payload: res.data.results })
+        if (payload.type === 'movie') {
+            const res = yield call(getRecommendFilmMovie, payload.id);
+            yield put({ type: HOME_GET_RECOMMEND_FILM_SUCCESS, payload: res.data.results })
+        } else {
+            const res = yield call(getRecommendFilmTv, payload.id);
+            yield put({ type: HOME_GET_RECOMMEND_FILM_SUCCESS, payload: res.data.results })
+        }
     } catch (e) {
         yield put({ type: HOME_GET_RECOMMEND_FILM_FAIL })
     }
@@ -115,8 +139,18 @@ function* getRecommendFilmSaga({ payload }) {
 function* getFilmByGenreMovieIdSaga({ payload }) {
     try {
         const res = yield call(getFimlByGenresMovie, payload.id);
-        yield put({ type: HOME_GET_FILM_BY_GENRE_MOVIE_ID_SUCCESS, payload: { genre: payload, results: res.data.results } })
-    } catch (e) {
+        yield put({
+            type: HOME_GET_FILM_BY_GENRE_MOVIE_ID_SUCCESS,
+            payload: {
+                genre: payload,
+                results: res.data.results.map((item) => ({
+                    ...item,
+                    type: 'movie'
+                }))
+            }
+        })
+    }
+    catch (e) {
         yield put({ type: HOME_GET_FILM_BY_GENRE_MOVIE_ID_FAIL })
     }
 }
@@ -124,7 +158,17 @@ function* getFilmByGenreMovieIdSaga({ payload }) {
 function* getFilmByGenreTvIdSaga({ payload }) {
     try {
         const res = yield call(getFimlByGenresTv, payload.id);
-        yield put({ type: HOME_GET_FILM_BY_GENRE_TV_ID_SUCCESS, payload: { genre: payload, results: res.data.results } })
+        yield put({
+            type: HOME_GET_FILM_BY_GENRE_TV_ID_SUCCESS,
+            payload: {
+                genre: payload,
+                results: res.data.results.map((item) => ({
+                    ...item,
+                    title: item.original_name,
+                    type: 'tv'
+                }))
+            }
+        })
     } catch (e) {
         yield put({ type: HOME_GET_FILM_BY_GENRE_TV_ID_FAIL })
     }
@@ -153,7 +197,6 @@ function* mySaga() {
     yield takeEvery(HOME_GET_FILM_BY_GENRE_MOVIE, getMovieByGenresSaga)
     yield takeEvery(HOME_GET_FILM_BY_GENRE_TV, getTvByGenresSaga)
     yield takeEvery(HOME_GET_MOVIE_DETAIL, getMovieDetailSaga)
-    yield takeEvery(HOME_GET_TV_DETAIL, getTvDetailSaga)
     yield takeEvery(HOME_GET_ACTOR, getActorSaga)
     yield takeEvery(HOME_GET_TRAILER, getTrailerSaga)
     yield takeEvery(HOME_GET_RECOMMEND_FILM, getRecommendFilmSaga)

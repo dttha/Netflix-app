@@ -2,7 +2,7 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import Banner from '../../components/Banner';
 import Category from '../../components/Category';
@@ -15,6 +15,7 @@ const Movie = () => {
     const [isActive, setActive] = useState(false);
     const genresMovie = useSelector((state) => state.film.genresMovie)
     const listMovieByGenreId = useSelector((state) => state.film.listMovieByGenreId)
+    console.log("🚀 ~ file: index.js ~ line 18 ~ Movie ~ listMovieByGenreId", listMovieByGenreId)
     const dispatch = useDispatch()
 
     useEffect(() => {

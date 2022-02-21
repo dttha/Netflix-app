@@ -10,7 +10,6 @@ const initialState = {
     listMovieByGenreId: {},
     listTvByGenreId: {},
     detailMovie: {},
-    detailTv: {},
     actor: {},
     trailer: null,
     listRecommendFilm: []
@@ -21,7 +20,11 @@ const filmReducer = (state = initialState, action) => {
         case HOME_GET_FILM_MOVIE_SUCCESS: {
             return {
                 ...state,
-                listMovie: action.payload,
+                listMovie: action.payload.map((item) => ({
+                    ...item,
+                    type: 'movie'
+                })),
+
             }
         }
         case HOME_GET_FILM_TV_SUCCESS: {
@@ -30,7 +33,8 @@ const filmReducer = (state = initialState, action) => {
                 listTv: action.payload.map((item) => {
                     return {
                         ...item,
-                        title: item.original_name
+                        title: item.original_name,
+                        type: 'tv'
                     }
                 }),
             }
@@ -59,27 +63,15 @@ const filmReducer = (state = initialState, action) => {
             }
         }
         case HOME_GET_FILM_BY_GENRE_TV_SUCCESS: {
-            console.log(action.payload)
             return {
                 ...state,
-                listTvByGenres: action.payload.map((item) => {
-                    return {
-                        ...item,
-                        title: item.original_name
-                    }
-                }),
+                listTvByGenres: action.payload
             }
         }
         case HOME_GET_MOVIE_DETAIL_SUCCESS: {
             return {
                 ...state,
                 detailMovie: action.payload
-            }
-        }
-        case HOME_GET_TV_DETAIL_SUCCESS: {
-            return {
-                ...state,
-                detailTv: action.payload
             }
         }
         case HOME_GET_ACTOR_SUCCESS: {
