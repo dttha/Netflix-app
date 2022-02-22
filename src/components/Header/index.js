@@ -5,9 +5,12 @@ import { faBars, faSearch, faSortDown } from '@fortawesome/free-solid-svg-icons'
 import avata from '../../assets/images/avata.jpg'
 import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { GET_ACCOUNT_FAIL } from '../../constants';
 
 const Header = () => {
     const [isActive, setActive] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const header = document.getElementById("nav")
@@ -40,7 +43,9 @@ const Header = () => {
                                 <Link to="/account" className={styles["home-header-detail"]}>
                                     <span>Account</span>
                                 </Link>
-                                <Link to="/">
+                                <Link to="/" onClick={() => dispatch({
+                                    type: GET_ACCOUNT_FAIL
+                                })}>
                                     <p className={styles["home-header-logout-mobile"]}>Log out</p>
                                 </Link>
                             </div>
