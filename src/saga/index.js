@@ -29,48 +29,76 @@ function* getFilmTvSaga() {
 }
 
 function* getGenresMovieSaga() {
-    const res = yield call(getGenresMovie)
-    yield put({ type: HOME_GET_GENRES_MOVIE_SUCCESS, payload: res.data.genres })
+    yield put({ type: SHOW_LOADING })
+    try {
+        const res = yield call(getGenresMovie)
+        yield put({ type: HOME_GET_GENRES_MOVIE_SUCCESS, payload: res.data.genres })
+    } catch (e) {
+        console.log(e)
+    } finally {
+        yield put({ type: HIDE_LOADING })
+    }
 }
 
 function* getGenresTvSaga() {
-    const res = yield call(getGenresTv)
-    yield put({ type: HOME_GET_GENRES_TV_SUCCESS, payload: res.data.genres })
+    yield put({ type: SHOW_LOADING })
+    try {
+        const res = yield call(getGenresTv)
+        yield put({ type: HOME_GET_GENRES_TV_SUCCESS, payload: res.data.genres })
+    } catch (e) {
+        console.log(e)
+    } finally {
+        yield put({ type: HIDE_LOADING })
+    }
 }
 
 function* getMovieByGenresSaga({ payload }) {
-    const genresMovie = yield select((state) => state.film.genresMovie)
-    const res = yield all(genresMovie.map((item) => {
-        return call(getFimlByGenresMovie, item.id)
-    }))
-    const resMap = res.map((item, index) => {
-        return {
-            genres: genresMovie[index],
-            results: item.data.results.map((item) => ({
-                ...item,
-                type: "movie"
-            }))
-        }
-    })
-    yield put({ type: HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, payload: resMap })
+    yield put({ type: SHOW_LOADING })
+    try {
+        const genresMovie = yield select((state) => state.film.genresMovie)
+        const res = yield all(genresMovie.map((item) => {
+            return call(getFimlByGenresMovie, item.id)
+        }))
+        const resMap = res.map((item, index) => {
+            return {
+                genres: genresMovie[index],
+                results: item.data.results.map((item) => ({
+                    ...item,
+                    type: "movie"
+                }))
+            }
+        })
+        yield put({ type: HOME_GET_FILM_BY_GENRE_MOVIE_SUCCESS, payload: resMap })
+    } catch (e) {
+        console.log(e)
+    } finally {
+        yield put({ type: HIDE_LOADING })
+    }
 }
 
 function* getTvByGenresSaga() {
-    const genresTv = yield select((state) => state.film.genresTv)
-    const res = yield all(genresTv.map((item) => {
-        return call(getFimlByGenresTv, item.id)
-    }))
-    const resMap = res.map((item, index) => {
-        return {
-            genres: genresTv[index],
-            results: item.data.results.map((item) => ({
-                ...item,
-                title: item.original_name,
-                type: "tv"
-            }))
-        }
-    })
-    yield put({ type: HOME_GET_FILM_BY_GENRE_TV_SUCCESS, payload: resMap })
+    yield put({ type: SHOW_LOADING })
+    try {
+        const genresTv = yield select((state) => state.film.genresTv)
+        const res = yield all(genresTv.map((item) => {
+            return call(getFimlByGenresTv, item.id)
+        }))
+        const resMap = res.map((item, index) => {
+            return {
+                genres: genresTv[index],
+                results: item.data.results.map((item) => ({
+                    ...item,
+                    title: item.original_name,
+                    type: "tv"
+                }))
+            }
+        })
+        yield put({ type: HOME_GET_FILM_BY_GENRE_TV_SUCCESS, payload: resMap })
+    } catch (e) {
+        console.log(e)
+    } finally {
+        yield put({ type: HIDE_LOADING })
+    }
 }
 
 function* getMovieDetailSaga({ payload }) {
@@ -95,6 +123,7 @@ function* getMovieDetailSaga({ payload }) {
 }
 
 function* getActorSaga({ payload }) {
+    yield put({ type: SHOW_LOADING })
     try {
         if (payload.type === 'movie') {
             const res = yield call(getActorMovie, payload.id)
@@ -105,10 +134,13 @@ function* getActorSaga({ payload }) {
         }
     } catch (e) {
         console.log(e);
+    } finally {
+        yield put({ type: HIDE_LOADING })
     }
 }
 
 function* getTrailerSaga({ payload }) {
+    yield put({ type: SHOW_LOADING })
     try {
         if (payload.type === 'movie') {
             const res = yield call(getTrailerMovie, payload.id)
@@ -119,10 +151,13 @@ function* getTrailerSaga({ payload }) {
         }
     } catch (e) {
         yield put({ type: HOME_GET_TRAILER_FAIL })
+    } finally {
+        yield put({ type: HIDE_LOADING })
     }
 }
 
 function* getRecommendFilmSaga({ payload }) {
+    yield put({ type: SHOW_LOADING })
     try {
         if (payload.type === 'movie') {
             const res = yield call(getRecommendFilmMovie, payload.id);
@@ -133,10 +168,13 @@ function* getRecommendFilmSaga({ payload }) {
         }
     } catch (e) {
         yield put({ type: HOME_GET_RECOMMEND_FILM_FAIL })
+    } finally {
+        yield put({ type: HIDE_LOADING })
     }
 }
 
 function* getFilmByGenreMovieIdSaga({ payload }) {
+    yield put({ type: SHOW_LOADING })
     try {
         const res = yield call(getFimlByGenresMovie, payload.id);
         yield put({
@@ -152,10 +190,13 @@ function* getFilmByGenreMovieIdSaga({ payload }) {
     }
     catch (e) {
         yield put({ type: HOME_GET_FILM_BY_GENRE_MOVIE_ID_FAIL })
+    } finally {
+        yield put({ type: HIDE_LOADING })
     }
 }
 
 function* getFilmByGenreTvIdSaga({ payload }) {
+    yield put({ type: SHOW_LOADING })
     try {
         const res = yield call(getFimlByGenresTv, payload.id);
         yield put({
@@ -171,6 +212,8 @@ function* getFilmByGenreTvIdSaga({ payload }) {
         })
     } catch (e) {
         yield put({ type: HOME_GET_FILM_BY_GENRE_TV_ID_FAIL })
+    } finally {
+        yield put({ type: HIDE_LOADING })
     }
 }
 
