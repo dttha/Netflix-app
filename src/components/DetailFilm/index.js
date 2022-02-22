@@ -112,7 +112,7 @@ const DetailFilm = () => {
                             <div className={styles["detail-film-info-actors"]}>
                                 <span className={styles["detail-film-info-title"]}>Actors:
                                     {actor.cast && actor.cast.filter((item, index) => index < 4).map((item, index) => {
-                                        return <span key={"actor" + index} className={styles["detail-film-info-name"]}>{item.name},{' '}</span>
+                                        return <span key={"actor" + index} className={styles["detail-film-info-name"]}> {item.name},{' '}</span>
                                     })
                                     }
                                 </span>
@@ -177,7 +177,7 @@ const DetailFilm = () => {
                                     if (index !== (detailMovie.genres && detailMovie.genres?.length - 1))
                                         return <Link to={`/movie/${item.id}`} key={index} className={styles["detail-film-info-name"]}> {item.name},{' '}</Link>
                                     else
-                                        return <Link to={`/movie/${item.id}`} key={index} className={styles["detail-film-info-name"]}>{item.name}.</Link>
+                                        return <Link to={`/movie/${item.id}`} key={index} className={styles["detail-film-info-name"]}> {item.name}.</Link>
                                 })
                                 }
                             </span>
