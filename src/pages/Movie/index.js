@@ -15,7 +15,6 @@ const Movie = () => {
     const [isActive, setActive] = useState(false);
     const genresMovie = useSelector((state) => state.film.genresMovie)
     const listMovieByGenreId = useSelector((state) => state.film.listMovieByGenreId)
-    console.log("🚀 ~ file: index.js ~ line 18 ~ Movie ~ listMovieByGenreId", listMovieByGenreId)
     const dispatch = useDispatch()
 
     useEffect(() => {

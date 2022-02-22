@@ -52,13 +52,14 @@ function* getGenresTvSaga() {
     }
 }
 
-function* getMovieByGenresSaga({ payload }) {
+function* getMovieByGenresSaga() {
     yield put({ type: SHOW_LOADING })
     try {
         const genresMovie = yield select((state) => state.film.genresMovie)
         const res = yield all(genresMovie.map((item) => {
             return call(getFimlByGenresMovie, item.id)
         }))
+        console.log("🚀 ~ file: index.js ~ line 62 ~ res ~ res", res)
         const resMap = res.map((item, index) => {
             return {
                 genres: genresMovie[index],
@@ -76,13 +77,14 @@ function* getMovieByGenresSaga({ payload }) {
     }
 }
 
-function* getTvByGenresSaga() {
+function* getTvByGenresSaga({ payload }) {
     yield put({ type: SHOW_LOADING })
     try {
         const genresTv = yield select((state) => state.film.genresTv)
         const res = yield all(genresTv.map((item) => {
             return call(getFimlByGenresTv, item.id)
         }))
+        console.log("🚀 ~ file: index.js ~ line 86 ~ res ~ res", res)
         const resMap = res.map((item, index) => {
             return {
                 genres: genresTv[index],
@@ -140,10 +142,12 @@ function* getActorSaga({ payload }) {
 }
 
 function* getTrailerSaga({ payload }) {
+    console.log("🚀 ~ file: index.js ~ line 145 ~ function*getTrailerSaga ~ payload", payload)
     yield put({ type: SHOW_LOADING })
     try {
         if (payload.type === 'movie') {
             const res = yield call(getTrailerMovie, payload.id)
+            console.log("🚀 ~ file: index.js ~ line 150 ~ function*getTrailerSaga ~ res", res)
             yield put({ type: HOME_GET_TRAILER_SUCCESS, payload: res.data.results[0] })
         } else {
             const res = yield call(getTrailerTv, payload.id)

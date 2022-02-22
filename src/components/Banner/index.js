@@ -2,18 +2,19 @@ import React from 'react';
 import styles from './styles.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { HOME_GET_TRAILER } from '../../constants';
 import { URLs } from '../../constants/urls';
 
 const Banner = ({ detailMovie }) => {
+    console.log("🚀 ~ file: index.js ~ line 11 ~ Banner ~ detailMovie", detailMovie)
     const location = useLocation()
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const onClickTrailer = (e) => {
-        dispatch({ type: HOME_GET_TRAILER, payload: detailMovie?.id })
+        dispatch({ type: HOME_GET_TRAILER, payload: detailMovie })
     };
     return (
         <div className={styles["banner"]}>
@@ -32,7 +33,7 @@ const Banner = ({ detailMovie }) => {
                                 <FontAwesomeIcon icon={faCaretRight} style={{ marginRight: 10, fontSize: 20 }}></FontAwesomeIcon>
                                 <span>Trailer</span>
                             </div>
-                            <Link to={`${location.pathname}/movie/${detailMovie?.id}`} className={styles["btn-more-info"]}>
+                            <Link to={`${location.pathname}/movie-detail/${detailMovie?.id}/${detailMovie?.type}`} className={styles["btn-more-info"]}>
                                 <FontAwesomeIcon icon={faInfoCircle} style={{ marginRight: 10 }}></FontAwesomeIcon>
                                 <span>More info</span>
                             </Link>
