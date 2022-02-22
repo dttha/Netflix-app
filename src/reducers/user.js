@@ -29,6 +29,7 @@ const userReducer = (state = initialState, action) => {
         case GET_ACCOUNT_FAIL: {
             return {
                 ...state,
+                user: action.payload,
                 isLogin: false
             }
         }

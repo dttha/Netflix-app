@@ -6,7 +6,7 @@ import avata from '../../assets/images/avata.jpg'
 import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { GET_ACCOUNT_FAIL } from '../../constants';
+import { GET_ACCOUNT_FAIL, GET_ACCOUNT_SUCCESS } from '../../constants';
 
 const Header = () => {
     const [isActive, setActive] = useState(false);
@@ -44,7 +44,7 @@ const Header = () => {
                                     <span>Account</span>
                                 </Link>
                                 <Link to="/" onClick={() => dispatch({
-                                    type: GET_ACCOUNT_FAIL
+                                    type: GET_ACCOUNT_FAIL, payload: null
                                 })}>
                                     <p className={styles["home-header-logout-mobile"]}>Log out</p>
                                 </Link>
